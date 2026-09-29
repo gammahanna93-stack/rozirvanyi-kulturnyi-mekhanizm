@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Академічна інтерактивна лекція про мобільність, осілість і ранні інституції">
+  <title>Лекція 2 — Мобільність, осілість і ранні інституції</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23071a2c'/%3E%3Ccircle cx='20' cy='32' r='8' fill='none' stroke='%23f28b3c' stroke-width='5'/%3E%3Cpath d='M31 20h17M31 32h17M31 44h17' stroke='%23fffdf8' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --navy-950:#071a2c;
+      --navy-900:#0a2742;
+      --navy-800:#113a5b;
+      --navy-700:#185477;
+      --orange:#f28b3c;
+      --orange-deep:#d8681e;
+      --paper:#f7f4ed;
+      --paper-2:#e9edf0;
+      --white:#fffdf8;
+      --ink:#102131;
+      --muted:#627181;
+      --red:#cf5848;
+      --green:#6ea987;
+      --line-light:rgba(255,255,255,.18);
+      --line-dark:rgba(10,39,66,.18);
+      --shadow:0 22px 70px rgba(5,23,39,.22);
+      --radius-lg:clamp(20px,2.1vw,32px);
+      --radius-md:18px;
+      --pad-x:clamp(26px,5.4vw,88px);
+      --pad-top:clamp(74px,10vh,96px);
+      --pad-bottom:clamp(90px,12vh,112px);
+      --font:Inter,"Segoe UI",Arial,sans-serif;
+    }
+
+    *{box-sizing:border-box}
+    html{background:var(--navy-950);scroll-behavior:smooth}
+    body{margin:0;font-family:var(--font);color:var(--ink);text-rendering:optimizeLegibility;overflow:hidden}
+    button,a{font:inherit}
+    button{cursor:pointer}
+    button:focus-visible,a:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+    a{color:inherit}
+    .skip-link{position:fixed;z-index:500;top:8px;left:8px;padding:10px 14px;border-radius:8px;background:var(--white);color:var(--navy-950);transform:translateY(-160%)}
+    .skip-link:focus{transform:none}
+
+    .hud{position:fixed;z-index:140;top:0;left:0;right:0;height:66px;padding:14px var(--pad-x);display:flex;align-items:center;justify-content:space-between;color:var(--white);background:linear-gradient(to bottom,rgba(7,26,44,.92),rgba(7,26,44,.15),transparent)}
+    .hud__brand{display:flex;align-items:center;gap:13px;font-weight:900;font-size:.76rem;letter-spacing:.11em;text-transform:uppercase}
+    .hud__mark{width:11px;height:11px;border:3px solid var(--orange);border-radius:50%;box-shadow:16px 0 0 -3px var(--white);margin-right:12px}
+    .hud__tools{display:flex;gap:8px}
+    .quiet-button{min-height:38px;padding:8px 14px;border:1px solid var(--line-light);border-radius:999px;background:rgba(7,26,44,.66);color:var(--white);font-size:.74rem;font-weight:850;transition:.22s ease}
+    .quiet-button:hover,.quiet-button[aria-expanded="true"]{transform:translateY(-1px);border-color:var(--orange);background:rgba(17,58,91,.94)}
+
+    .deck{position:relative;width:100vw;height:100dvh;overflow:hidden;background:var(--navy-950)}
+    .slide{position:absolute;inset:0;display:none;overflow:hidden;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);isolation:isolate}
+    .slide.active{display:grid}
+    .slide::after{content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.026) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.026) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,black,transparent 85%)}
+    .slide--navy{background:var(--navy-900);color:var(--white)}
+    .slide--deep{background:var(--navy-950);color:var(--white)}
+    .slide--paper{background:var(--paper);color:var(--ink)}
+    .slide--mist{background:var(--paper-2);color:var(--ink)}
+    .slide--orange{background:var(--orange);color:var(--navy-950)}
+    .slide--red{background:#a94235;color:var(--white)}
+    .slide-grid{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(320px,.96fr);gap:clamp(28px,5vw,82px);align-items:center;min-height:100%}
+    .slide-grid--wide{grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr)}
+    .content{align-self:center;max-width:980px}
+    .content--full{max-width:none;width:100%;align-self:center}
+    .kicker{margin:0 0 14px;font-size:.76rem;font-weight:950;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep)}
+    .slide--navy .kicker,.slide--deep .kicker,.slide--red .kicker{color:var(--orange)}
+    .kicker::before{content:"";display:inline-block;width:34px;height:4px;margin:0 12px 2px 0;background:currentColor}
+    h1,h2,h3,p{margin-top:0}
+    h1{margin-bottom:24px;font-size:clamp(3rem,7.2vw,7.6rem);line-height:.88;letter-spacing:-.065em;font-weight:950}
+    h2{max-width:18ch;margin-bottom:22px;font-size:clamp(2.2rem,4.4vw,5.1rem);line-height:.95;letter-spacing:-.045em;font-weight:930}
+    h3{font-size:clamp(1.05rem,1.6vw,1.48rem);line-height:1.16}
+    .lead{max-width:56ch;margin-bottom:24px;font-size:clamp(1.08rem,1.7vw,1.55rem);line-height:1.5;color:var(--muted)}
+    .slide--navy .lead,.slide--deep .lead,.slide--red .lead{color:rgba(255,255,255,.76)}
+    .accent{color:var(--orange)}
+    .accent-dark{color:var(--orange-deep)}
+    .academic-note{max-width:64ch;padding:14px 18px;border-left:5px solid var(--orange);background:rgba(255,255,255,.58);font-size:clamp(.94rem,1.3vw,1.12rem);line-height:1.5}
+    .slide--navy .academic-note,.slide--deep .academic-note{background:rgba(255,255,255,.07)}
+
+    [data-reveal]{opacity:0;transform:translateY(16px)}
+    .slide.active [data-reveal]{animation:reveal .55s cubic-bezier(.2,.75,.2,1) forwards;animation-delay:calc(var(--i,0) * 85ms)}
+    @keyframes reveal{to{opacity:1;transform:none}}
+    @keyframes float{50%{transform:translateY(-9px)}}
+    @keyframes pulse{50%{box-shadow:0 0 0 14px rgba(242,139,60,0)}}
+    @keyframes drift{to{transform:rotate(360deg)}}
+
+    .cover{background:var(--navy-950);color:var(--white)}
+    .cover::before{content:"02";position:absolute;right:5vw;top:8vh;font-size:min(25vw,280px);font-weight:950;line-height:1;color:rgba(255,255,255,.035);z-index:-1}
+    .cover::after{background:radial-gradient(circle at 78% 52%,rgba(242,139,60,.14),transparent 29%),linear-gradient(115deg,transparent 49.8%,rgba(255,255,255,.06) 50%,transparent 50.2%);mask-image:none}
+    .cover h1 span{display:block}
+    .cover h1 span:nth-child(2){margin-left:clamp(14px,5vw,76px)}
+    .cover h1 span:nth-child(3){margin-left:clamp(42px,10vw,155px);color:var(--orange)}
+    .cover-card{position:relative;overflow:hidden;border:1px solid var(--line-light);border-radius:var(--radius-lg);height:min(64vh,630px);min-height:0;box-shadow:var(--shadow);background:#051421}
+    .cover-card img{display:block;width:100%;height:100%;min-height:0;object-fit:cover;opacity:.66;filter:saturate(.76) contrast(1.08)}
+    .cover-card::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(7,26,44,.96),transparent 58%)}
+    .cover-card__caption{position:absolute;z-index:2;left:24px;right:24px;bottom:22px}
+    .cover-card__caption strong{display:block;margin-bottom:7px;color:var(--orange);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase}
+    .cover-card__caption p{margin:0;font-size:clamp(1rem,1.6vw,1.38rem);line-height:1.35}
+    .orbit{position:absolute;width:160px;height:160px;right:-55px;top:-48px;border:1px solid rgba(255,255,255,.16);border-radius:50%;animation:drift 18s linear infinite}
+    .orbit::before,.orbit::after{content:"";position:absolute;border-radius:50%;background:var(--orange)}
+    .orbit::before{width:13px;height:13px;left:17px;top:30px;box-shadow:0 0 0 8px rgba(242,139,60,.1)}
+    .orbit::after{width:8px;height:8px;right:22px;bottom:25px}
+
+    .art{position:relative;margin:0;border-radius:var(--radius-lg);overflow:hidden;background:var(--navy-950);box-shadow:var(--shadow);height:min(66vh,650px);min-height:0}
+    .art img{display:block;width:100%;height:100%;min-height:0;object-fit:cover;transition:transform .8s cubic-bezier(.2,.75,.2,1),filter .4s ease}
+    .slide.active .art img{transform:scale(1.015)}
+    .art::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(7,26,44,.92),transparent 44%);pointer-events:none}
+    .art figcaption{position:absolute;z-index:2;left:20px;right:20px;bottom:17px;color:rgba(255,255,255,.86);font-size:.72rem;line-height:1.42}
+    .art figcaption a{color:var(--white);text-decoration-color:var(--orange);text-underline-offset:3px}
+    .art--diagram{background:var(--white)}
+    .art--diagram img{object-fit:contain;padding:16px;filter:contrast(1.03)}
+    .art--diagram::after{background:linear-gradient(to top,rgba(7,26,44,.92),transparent 28%)}
+    .art.is-error{display:grid;place-items:center;min-height:320px;background:var(--navy-900)}
+    .art.is-error::before{content:"Зображення тимчасово недоступне";padding:24px;color:var(--white);font-weight:800;text-align:center}
+
+    .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
+    .stat{padding:18px;border:1px solid var(--line-dark);border-radius:var(--radius-md);background:rgba(255,255,255,.58)}
+    .slide--navy .stat,.slide--deep .stat{border-color:var(--line-light);background:rgba(255,255,255,.055)}
+    .stat b{display:block;margin-bottom:6px;color:var(--orange-deep);font-size:clamp(1.35rem,2.4vw,2.3rem)}
+    .slide--navy .stat b,.slide--deep .stat b{color:var(--orange)}
+    .stat span{font-size:.86rem;line-height:1.35;color:var(--muted)}
+    .slide--navy .stat span,.slide--deep .stat span{color:rgba(255,255,255,.7)}
+
+    .question-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(330px,.8fr);gap:clamp(30px,7vw,110px);align-items:center}
+    .question-mark{font-size:clamp(10rem,25vw,24rem);line-height:.7;font-weight:950;color:rgba(242,139,60,.16);text-align:center;animation:float 5s ease-in-out infinite}
+    .thesis-card{padding:clamp(24px,3vw,42px);border-radius:var(--radius-lg);background:var(--orange);color:var(--navy-950);box-shadow:var(--shadow)}
+    .thesis-card small{display:block;margin-bottom:14px;font-weight:950;letter-spacing:.13em;text-transform:uppercase}
+    .thesis-card p{margin:0;font-size:clamp(1.3rem,2.1vw,2rem);line-height:1.25;font-weight:850}
+
+    .outcomes{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+    .outcome{position:relative;min-height:200px;padding:24px;border:1px solid var(--line-dark);border-radius:var(--radius-md);background:rgba(255,255,255,.6)}
+    .outcome span{display:block;margin-bottom:36px;color:var(--orange-deep);font-size:.72rem;font-weight:950;letter-spacing:.13em}
+    .outcome p{margin:0;font-size:clamp(.95rem,1.35vw,1.17rem);line-height:1.38;font-weight:730}
+
+    .nonlinear-grid{display:grid;grid-template-columns:repeat(6,minmax(105px,1fr));gap:10px;align-items:stretch;margin-top:28px}
+    .route-node{display:grid;place-items:center;min-height:112px;padding:15px;border-radius:16px;background:var(--navy-900);color:var(--white);font-size:.9rem;line-height:1.2;text-align:center;font-weight:850}
+    .route-node:nth-child(2n){background:var(--orange);color:var(--navy-950)}
+    .route-node--ghost{border:1px dashed rgba(10,39,66,.35);background:transparent!important;color:var(--ink)!important}
+    .route-caption{grid-column:1/-1;margin:5px 0 0;padding:16px 20px;border-left:5px solid var(--orange);font-size:1.03rem;line-height:1.45}
+
+    .evidence-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
+    .evidence-card{min-height:260px;padding:22px;border:1px solid var(--line-dark);border-radius:var(--radius-md);background:rgba(255,255,255,.54);color:inherit;text-align:left;transition:.25s ease}
+    .evidence-card:hover,.evidence-card.is-open{transform:translateY(-5px);border-color:var(--orange);box-shadow:0 18px 38px rgba(10,39,66,.12)}
+    .evidence-card b{display:block;margin-bottom:22px;color:var(--orange-deep);font-size:.73rem;letter-spacing:.11em;text-transform:uppercase}
+    .evidence-card strong{display:block;margin-bottom:12px;font-size:1.18rem}
+    .evidence-card p{margin:0;color:var(--muted);font-size:.92rem;line-height:1.45}
+    .evidence-card .detail{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line-dark);color:var(--ink)}
+    .evidence-card.is-open .detail{display:block;animation:reveal .3s ease both}
+
+    .concept-trio{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+    .concept{padding:24px;border:1px solid var(--line-dark);border-radius:var(--radius-md);background:rgba(255,255,255,.62)}
+    .concept::before{content:attr(data-number);display:grid;place-items:center;width:40px;height:40px;margin-bottom:18px;border-radius:50%;background:var(--orange);color:var(--navy-950);font-weight:950}
+    .concept p{margin:0;color:var(--muted);line-height:1.45}
+
+    .culture-strip{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;margin-top:24px}
+    .culture-list{display:grid;gap:10px}
+    .culture-item{padding:17px 19px;border-left:5px solid var(--orange);background:rgba(255,255,255,.58)}
+    .culture-item strong{display:block;margin-bottom:5px}
+    .culture-item span{color:var(--muted);font-size:.9rem;line-height:1.4}
+    .mini-art{position:relative;overflow:hidden;border-radius:var(--radius-lg);min-height:330px;background:var(--navy-900)}
+    .mini-art img{width:100%;height:100%;object-fit:cover}
+    .mini-art p{position:absolute;left:16px;right:16px;bottom:14px;margin:0;padding:10px 12px;border-radius:10px;background:rgba(7,26,44,.82);color:var(--white);font-size:.72rem;line-height:1.35}
+
+    .theory-tabs{display:grid;grid-template-columns:270px minmax(0,1fr);gap:24px;margin-top:24px}
+    .theory-tabs__nav{display:grid;gap:9px;align-content:start}
+    .theory-tab{padding:16px 18px;border:1px solid var(--line-dark);border-radius:14px;background:rgba(255,255,255,.56);color:var(--ink);text-align:left;font-weight:850}
+    .theory-tab.is-active{background:var(--navy-900);color:var(--white);border-color:var(--navy-900)}
+    .theory-panel{display:none;min-height:310px;padding:30px;border-radius:var(--radius-lg);background:var(--navy-900);color:var(--white);box-shadow:var(--shadow)}
+    .theory-panel.is-active{display:block;animation:reveal .35s ease both}
+    .theory-panel .position{color:var(--orange);font-size:.75rem;font-weight:950;letter-spacing:.12em;text-transform:uppercase}
+    .theory-panel p{font-size:clamp(1rem,1.45vw,1.28rem);line-height:1.55;color:rgba(255,255,255,.78)}
+    .theory-panel footer{padding-top:15px;border-top:1px solid var(--line-light);font-size:.85rem;color:rgba(255,255,255,.64)}
+
+    .claim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+    .claim{padding:24px;border-radius:var(--radius-md);border:1px solid var(--line-dark);background:rgba(255,255,255,.58)}
+    .claim b{display:block;margin-bottom:12px;color:var(--orange-deep);font-size:.74rem;text-transform:uppercase;letter-spacing:.1em}
+    .claim p{margin:0;line-height:1.45}
+    .claim--warn{border-color:rgba(207,88,72,.55)}
+    .claim--warn b{color:var(--red)}
+
+    .tradeoff{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}
+    .tradeoff-card{padding:26px;border-radius:var(--radius-lg);background:rgba(255,255,255,.58);border:1px solid var(--line-dark)}
+    .tradeoff-card h3{display:flex;align-items:center;gap:11px}
+    .tradeoff-card h3::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--green)}
+    .tradeoff-card--cost h3::before{background:var(--red)}
+    .tradeoff-card ul{margin:0;padding-left:20px;color:var(--muted);line-height:1.7}
+
+    .mechanism{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap;margin-top:30px}
+    .mechanism-node{flex:1 1 135px;min-height:96px;padding:14px;border:1px solid rgba(255,255,255,.24);border-radius:16px;background:rgba(255,255,255,.055);color:var(--white);font-weight:900;transition:.24s ease}
+    .mechanism-node:hover,.mechanism-node.is-active{background:var(--orange);color:var(--navy-950);border-color:var(--orange);transform:translateY(-4px)}
+    .mechanism-arrow{align-self:center;color:var(--orange);font-size:1.6rem;font-weight:950}
+    .mechanism-explain{min-height:92px;margin-top:18px;padding:20px 22px;border-left:5px solid var(--orange);background:rgba(255,255,255,.07);font-size:clamp(1rem,1.45vw,1.25rem);line-height:1.5}
+
+    .time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+    .time-card{min-height:235px;padding:25px;border-radius:var(--radius-md);background:var(--navy-900);color:var(--white)}
+    .time-card .icon{display:block;margin-bottom:32px;color:var(--orange);font-size:2rem;font-weight:950}
+    .time-card p{margin:0;color:rgba(255,255,255,.7);line-height:1.45}
+
+    .caution-stack{display:grid;gap:12px;margin-top:25px}
+    .caution-row{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:start;padding:16px 18px;border:1px solid var(--line-dark);border-radius:15px;background:rgba(255,255,255,.58)}
+    .caution-row b{color:var(--orange-deep);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase}
+    .caution-row p{margin:0;line-height:1.45;color:var(--muted)}
+
+    .memory-compare{display:grid;grid-template-columns:1fr 90px 1fr;align-items:stretch;gap:16px;margin-top:28px}
+    .memory-card{padding:28px;border-radius:var(--radius-lg);background:rgba(255,255,255,.6);border:1px solid var(--line-dark)}
+    .memory-card ul{margin:18px 0 0;padding-left:20px;color:var(--muted);line-height:1.65}
+    .memory-bridge{display:grid;place-items:center;color:var(--orange-deep);font-size:2.5rem;font-weight:950}
+
+    .ledger{display:grid;grid-template-columns:1.08fr .92fr;gap:24px;margin-top:22px}
+    .ledger-sheet{overflow:hidden;border-radius:var(--radius-md);border:1px solid var(--line-dark);background:var(--white);box-shadow:var(--shadow)}
+    .ledger-row{display:grid;grid-template-columns:1fr .7fr .8fr;padding:13px 16px;border-bottom:1px solid var(--line-dark);font-size:.87rem}
+    .ledger-row:first-child{background:var(--navy-900);color:var(--white);font-weight:850}
+    .ledger-row:last-child{border-bottom:0}
+    .ledger-control{display:grid;align-content:center;gap:12px}
+    .reveal-button{padding:14px 18px;border:0;border-radius:14px;background:var(--orange);color:var(--navy-950);font-weight:900}
+    .ledger-absent{display:none;padding:18px;border-left:5px solid var(--red);background:rgba(207,88,72,.1);line-height:1.45}
+    .ledger-absent.is-visible{display:block;animation:reveal .35s ease both}
+
+    .memory-chain{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap;margin-top:34px}
+    .memory-chain span{flex:1 1 145px;display:grid;place-items:center;min-height:90px;padding:14px;border-radius:15px;background:rgba(255,255,255,.07);border:1px solid var(--line-light);text-align:center;font-weight:850}
+    .memory-chain b{align-self:center;color:var(--orange);font-size:1.5rem}
+
+    .source-types{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+    .source-type{padding:26px;border-radius:var(--radius-lg);border:1px solid var(--line-dark);background:rgba(255,255,255,.6)}
+    .source-type strong{display:block;margin-bottom:16px;color:var(--orange-deep)}
+    .source-type p{margin:0 0 12px;line-height:1.45;color:var(--muted)}
+    .source-type small{display:block;padding-top:12px;border-top:1px solid var(--line-dark);font-weight:750}
+
+    .case-matrix{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:24px}
+    .case{min-height:245px;padding:19px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid var(--line-light)}
+    .case b{display:block;margin-bottom:17px;color:var(--orange);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
+    .case strong{display:block;margin-bottom:10px;font-size:1.05rem}
+    .case p{margin:0;color:rgba(255,255,255,.68);font-size:.87rem;line-height:1.45}
+
+    .dual-result{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:30px}
+    .result-card{position:relative;overflow:hidden;min-height:280px;padding:30px;border-radius:var(--radius-lg);background:var(--navy-900);color:var(--white);box-shadow:var(--shadow)}
+    .result-card::after{content:"";position:absolute;width:220px;height:220px;border:1px solid rgba(255,255,255,.1);border-radius:50%;right:-70px;bottom:-90px}
+    .result-card--power{background:#7e352f}
+    .result-card .tag{color:var(--orange);font-size:.75rem;font-weight:950;letter-spacing:.12em;text-transform:uppercase}
+    .result-card p{max-width:35ch;color:rgba(255,255,255,.76);font-size:1.08rem;line-height:1.5}
+
+    .quiz{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+    .quiz-card{padding:22px;border-radius:var(--radius-md);background:rgba(255,255,255,.58);border:1px solid var(--line-dark)}
+    .quiz-card p{min-height:64px;font-weight:800;line-height:1.4}
+    .quiz-options{display:grid;gap:8px}
+    .quiz-option{padding:11px 13px;border:1px solid var(--line-dark);border-radius:11px;background:transparent;color:var(--ink);text-align:left;font-size:.85rem}
+    .quiz-option:hover{border-color:var(--orange)}
+    .quiz-option.is-correct{background:rgba(110,169,135,.18);border-color:var(--green)}
+    .quiz-option.is-wrong{background:rgba(207,88,72,.13);border-color:var(--red)}
+    .quiz-feedback{min-height:40px;margin:12px 0 0;color:var(--muted);font-size:.82rem;line-height:1.4}
+
+    .assignment{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}
+    .assignment-card{padding:25px;border:1px solid var(--line-light);border-radius:var(--radius-md);background:rgba(255,255,255,.06)}
+    .assignment-card h3{color:var(--orange)}
+    .assignment-card ol{margin:0;padding-left:22px;color:rgba(255,255,255,.74);line-height:1.75}
+    .rubric{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
+    .rubric span{padding:12px;border-radius:11px;background:rgba(255,255,255,.07);font-size:.78rem;text-align:center;color:rgba(255,255,255,.72)}
+
+    .sources{columns:2;column-gap:36px;margin:22px 0 0;padding:0;list-style:none}
+    .sources li{break-inside:avoid;margin:0 0 10px;padding:11px 13px;border-left:3px solid var(--orange);background:rgba(255,255,255,.055);font-size:.77rem;line-height:1.4;color:rgba(255,255,255,.74)}
+    .sources a{color:var(--white);text-decoration-color:rgba(242,139,60,.65)}
+
+    .notes{position:fixed;z-index:220;top:0;right:0;width:min(480px,92vw);height:100dvh;padding:86px 28px 30px;background:#fffdf8;color:var(--ink);box-shadow:-18px 0 50px rgba(0,0,0,.24);transform:translateX(104%);transition:transform .28s ease;overflow:auto}
+    body.notes-open .notes{transform:none}
+    .notes h3{margin-bottom:16px;color:var(--orange-deep)}
+    .notes p{white-space:pre-wrap;line-height:1.65;color:var(--muted)}
+    .notes__close{position:absolute;right:22px;top:22px;width:42px;height:42px;border:1px solid var(--line-dark);border-radius:50%;background:transparent;color:var(--ink);font-weight:900}
+
+    .deck-nav{position:fixed;z-index:150;left:clamp(18px,3vw,46px);right:clamp(18px,3vw,46px);bottom:16px;display:grid;grid-template-columns:auto 82px minmax(120px,1fr) auto;gap:14px;align-items:center;min-height:56px;padding:8px 12px;border:1px solid var(--line-light);border-radius:999px;background:rgba(7,26,44,.88);color:var(--white);backdrop-filter:blur(16px)}
+    .deck-nav>button{min-width:102px;padding:10px 14px;border:0;border-radius:999px;background:transparent;color:inherit;font-weight:850;transition:.2s ease}
+    .deck-nav>button:hover{background:var(--orange);color:var(--navy-950)}
+    .deck-nav>button:disabled{opacity:.32;cursor:default;background:transparent;color:inherit}
+    .counter{font-weight:900;text-align:center;font-variant-numeric:tabular-nums}
+    .progress-wrap{display:grid;gap:5px}
+    .progress-label{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:.69rem;font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.66)}
+    .progress{height:3px;background:rgba(255,255,255,.16);overflow:hidden}
+    .progress i{display:block;width:3.33%;height:100%;background:var(--orange);transition:width .35s ease}
+
+    dialog{width:min(1100px,94vw);max-height:86vh;padding:0;border:0;border-radius:26px;background:var(--paper);color:var(--ink);box-shadow:0 30px 100px rgba(0,0,0,.4)}
+    dialog::backdrop{background:rgba(4,16,28,.72);backdrop-filter:blur(5px)}
+    .overview-head{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:20px 24px;background:var(--navy-900);color:var(--white)}
+    .overview-head h2{margin:0;font-size:1.45rem;letter-spacing:-.02em}
+    .overview-head button{width:42px;height:42px;border:1px solid var(--line-light);border-radius:50%;background:transparent;color:var(--white)}
+    .overview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:22px;overflow:auto}
+    .overview-item{min-height:116px;padding:15px;border:1px solid var(--line-dark);border-radius:14px;background:var(--white);color:var(--ink);text-align:left}
+    .overview-item span{display:block;margin-bottom:15px;color:var(--orange-deep);font-size:.7rem;font-weight:950;letter-spacing:.1em}
+    .overview-item strong{font-size:.87rem;line-height:1.3}
+    .overview-item:hover{border-color:var(--orange);transform:translateY(-2px)}
+
+    @media (max-width:980px){
+      html,body{max-width:100%;overflow-x:hidden}body{overflow-y:auto}.deck{height:auto;min-height:100dvh;overflow:visible}.slide{position:relative;display:none;min-height:100dvh;height:auto;overflow:visible}.slide.active{display:block}.slide-grid,.question-layout,.culture-strip,.ledger{grid-template-columns:1fr}.art,.cover-card{min-height:42vh}.art img,.cover-card img{min-height:42vh}.outcomes,.evidence-grid,.case-matrix{grid-template-columns:repeat(2,1fr)}.nonlinear-grid{grid-template-columns:repeat(3,1fr)}.theory-tabs{grid-template-columns:1fr}.theory-tabs__nav{grid-template-columns:repeat(3,1fr)}.overview-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:680px){
+      :root{--pad-x:20px;--pad-top:78px;--pad-bottom:116px}.hud__brand{max-width:155px;font-size:.62rem}.hud__tools .quiet-button:first-child{display:none}.quiet-button{padding:8px 10px}.slide{min-height:100svh}.stat-row,.concept-trio,.time-grid,.tradeoff,.memory-compare,.source-types,.dual-result,.quiz,.assignment{grid-template-columns:1fr}.memory-bridge{min-height:44px;transform:rotate(90deg)}.outcomes,.evidence-grid,.case-matrix,.rubric{grid-template-columns:1fr}.nonlinear-grid{grid-template-columns:repeat(2,1fr)}.theory-tabs__nav{grid-template-columns:1fr}.caution-row{grid-template-columns:1fr}.sources{columns:1}.deck-nav{grid-template-columns:auto 58px 1fr auto;gap:5px;bottom:8px}.deck-nav>button{min-width:44px;padding:10px}.deck-nav>button span{display:none}.progress-label{font-size:.58rem}.overview-grid{grid-template-columns:1fr}.cover h1 span:nth-child(2),.cover h1 span:nth-child(3){margin-left:0}
+    }
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}[data-reveal]{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#deck">До змісту лекції</a>
+  <header class="hud" aria-label="Панель презентації">
+    <div class="hud__brand"><span class="hud__mark" aria-hidden="true"></span>Основи духовної культури</div>
+    <div class="hud__tools">
+      <button class="quiet-button" id="overviewButton" type="button">Огляд</button>
+      <button class="quiet-button" id="fullscreenButton" type="button" aria-pressed="false">На весь екран</button>
+      <button class="quiet-button" id="notesButton" type="button" aria-expanded="false">Для викладача</button>
+    </div>
+  </header>
+
+  <main class="deck" id="deck">
+    <section class="slide cover active" data-title="Обкладинка" data-note="Лекція розрахована на 90 хвилин. Вступна теза: тема не про єдину сходинку прогресу, а про різні способи координації людей у часі й просторі. Від самого початку відділяйте матеріальні сліди, академічні інтерпретації та авторську аналітичну модель.">
+      <div class="slide-grid">
+        <div class="content">
+          <p class="kicker" data-reveal style="--i:0">Лекція 2 · 90 хвилин</p>
+          <h1 data-reveal style="--i:1"><span>Мобільність,</span><span>осілість і</span><span>ранні інституції</span></h1>
+          <p class="lead" data-reveal style="--i:2">Різні траєкторії координації — від сезонної пам’яті до монумента, запасу й документа.</p>
+          <div class="academic-note" data-reveal style="--i:3"><strong>Центральне питання:</strong> як нові засоби співпраці водночас розширювали спільні можливості й створювали нові форми контролю?</div>
+        </div>
+        <figure class="cover-card" data-reveal style="--i:2">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Göbeklitepe_Building_D_5391.jpg" alt="Монументальна споруда D археологічного комплексу Ґьобеклі-Тепе" fetchpriority="high">
+          <div class="orbit" aria-hidden="true"></div>
+          <figcaption class="cover-card__caption"><strong>Початок не лінії, а дискусії</strong><p>Ґьобеклі-Тепе показує масштабну кооперацію до сформованої державності — але не розкриває нам готового «віровчення».</p></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="slide slide--navy" data-title="Центральна проблема" data-note="Поставте аудиторії запитання: чи є осілість обов’язково кращою за мобільність? Не шукайте швидкої відповіді. Важливо виявити приховану прогресистську шкалу, за якою мобільність автоматично означає простоту.">
+      <div class="question-layout content--full">
+        <div>
+          <p class="kicker" data-reveal style="--i:0">Проблема лекції</p>
+          <h2 data-reveal style="--i:1">Чи існує одна дорога до «складного суспільства»?</h2>
+          <p class="lead" data-reveal style="--i:2">Схема «мисливці-збирачі → землеробці → міста → письмо → держава» зручна, але перетворює різні способи життя на єдину шкалу.</p>
+          <div class="thesis-card" data-reveal style="--i:3"><small>Робоча теза</small><p>Осілість, виробництво їжі, монумент, письмо і державність — пов’язані процеси, але не універсальний пакет.</p></div>
+        </div>
+        <div class="question-mark" aria-hidden="true" data-reveal style="--i:2">?</div>
+      </div>
+    </section>
+
+    <section class="slide slide--paper" data-title="Результати навчання" data-note="Наприкінці лекції студенти мають не лише відтворити факти, а й виконати джерелознавчу операцію: назвати тип джерела, рівень твердження, допустиму інтерпретацію і межу висновку.">
+      <div class="content--full">
+        <p class="kicker" data-reveal style="--i:0">Після лекції</p>
+        <h2 data-reveal style="--i:1">Чотири академічні вміння</h2>
+        <div class="outcomes">
+          <article class="outcome" data-reveal style="--i:2"><span>01</span><p>Розрізняти мобільність, осілість, культивування та доместикацію.</p></article>
+          <article class="outcome" data-reveal style="--i:3"><span>02</span><p>Пояснювати механізм «запас → облік → норма → контроль → влада».</p></article>
+          <article class="outcome" data-reveal style="--i:4"><span>03</span><p>Відділяти джерело, переважну інтерпретацію, гіпотезу й авторський висновок.</p></article>
+          <article class="outcome" data-reveal style="--i:5"><span>04</span><p>Порівнювати культурні траєкторії без рейтингу «розвиненості».</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--mist" data-title="Не лінія, а мережа" data-note="Поясніть, що стрілки між процесами двобічні й контекстні. Осілість може передувати повній доместикації; монументальна кооперація — державі; письмо — масовій грамотності. Іноді спільноти поверталися до більшої мобільності.">
+      <div class="content--full">
+        <p class="kicker" data-reveal style="--i:0">Антистадіальна модель</p>
+        <h2 data-reveal style="--i:1">Не сходи прогресу, а мережа рішень</h2>
+        <div class="nonlinear-grid" aria-label="Пов’язані, але не послідовні процеси">
+          <div class="route-node" data-reveal style="--i:2">Мобільність</div>
+          <div class="route-node" data-reveal style="--i:3">Триваліша осілість</div>
+          <div class="route-node" data-reveal style="--i:4">Культивування</div>
+          <div class="route-node" data-reveal style="--i:5">Доместикація</div>
+          <div class="route-node" data-reveal style="--i:6">Монументальна кооперація</div>
+          <div class="route-node" data-reveal style="--i:7">Документ</div>
+          <div class="route-node route-node--ghost" data-reveal style="--i:3">Сезонне повернення</div>
+          <div class="route-node route-node--ghost" data-reveal style="--i:4">Змішані стратегії</div>
+          <div class="route-node route-node--ghost" data-reveal style="--i:5">Розосередження</div>
+          <div class="route-node route-node--ghost" data-reveal style="--i:6">Обмінні мережі</div>
+          <div class="route-node route-node--ghost" data-reveal style="--i:7">Ритуальні зібрання</div>
+          <div class="route-node route-node--ghost" data-reveal style="--i:8">Інституційна пам’ять</div>
+          <p class="route-caption" data-reveal style="--i:9">Зв’язок між процесами треба доводити <strong>для конкретного регіону, часу й типу джерел</strong>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--paper" data-title="Рівні доказовості" data-note="Запропонуйте студентам натиснути кожну картку. Це дисциплінує мову лекції: «знайдено», «переважно тлумачать», «дискутують», «у цій лекції ми моделюємо» — не синоніми.">
+      <div class="content--full">
+        <p class="kicker" data-reveal style="--i:0">Метод</p>
+        <h2 data-reveal style="--i:1">Чотири рівні твердження</h2>
+        <p class="lead" data-reveal style="--i:2">Натисніть картку, щоб побачити правильну академічну формулу.</p>
+        <div class="evidence-grid">
+          <button class="evidence-card" type="button" data-reveal style="--i:3"><b>Рівень 1</b><strong>Підтверджено джерелами</strong><p>Датований контекст, артефакт, напис, вимір.</p><span class="detail">Формула: «розкопки засвідчують…», «табличка містить…»</span></button>
+          <button class="evidence-card" type="button" data-reveal style="--i:4"><b>Рівень 2</b><strong>Переважна інтерпретація</strong><p>Найкраще пояснення сукупності даних.</p><span class="detail">Формула: «більшість дослідників пов’язує…»</span></button>
+          <button class="evidence-card" type="button" data-reveal style="--i:5"><b>Рівень 3</b><strong>Дискусійна гіпотеза</strong><p>Аргументована, але конкурентна реконструкція.</p><span class="detail">Формула: «одна з гіпотез припускає…»</span></button>
+          <button class="evidence-card" type="button" data-reveal style="--i:6"><b>Рівень 4</b><strong>Аналітична модель</strong><p>Прозоре застосування понять лекції.</p><span class="detail">Формула: «у межах нашої моделі це означає…»</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--deep" data-title="Український кейс: Межиріч" data-note="Межиріцька стоянка на Черкащині належить до верхнього палеоліту й передує неолітичним процесам. Її функція в лекції — спростувати ототожнення мобільності з відсутністю планування. Нові датування уточнюють хронологію; характер і тривалість використання споруд залишаються предметом дослідження.">
+      <div class="slide-grid">
+        <div class="content">
+          <p class="kicker" data-reveal style="--i:0">Україна · близько 18 тис. років тому</p>
+          <h2 data-reveal style="--i:1">Межиріч: мобільність не виключає архітектури</h2>
+          <p class="lead" data-reveal style="--i:2">Споруди з кісток мамонта, вогнища, виробництво знарядь і далекі матеріальні зв’язки показують складне планування без землеробської держави.</p>
+          <div class="stat-row" data-reveal style="--i:3">
+            <div class="stat"><b>4</b><span>виявлені споруди з кісток мамонта</span></div>
+            <div class="stat"><b>≈18 ka</b><span>уточнений пізньопалеолітичний горизонт</span></div>
+            <div class="stat"><b>межа</b><span>архітектура не доводить постійну осілість</span></div>
+          </div>
+        </div>
+        <figure class="art" data-reveal style="--i:2">
+          <img src="https://www.encyclopediaofukraine.com/pic%5CM%5CE%5CMezhyrich%20archeological%20site%20mammoth-bone%20dwelling%20view.jpg" loading="lazy" alt="Реконструкція житла з кісток мамонта з Межиріцької стоянки">
+          <figcaption>Реконструкція житла з Межиріцької стоянки · <a href="https://www.encyclopediaofukraine.com/display.asp?linkpath=pages%5CM%5CE%5CMezhyricharcheologicalsite.htm" target="_blank" rel="noopener">Internet Encyclopedia of Ukraine</a></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="slide slide--paper" data-title="Поняття" data-note="Осілість — тривалість перебування в місці, а не абсолютна нерухомість. Культивування — керування рослинами без обов’язково завершеної доместикації. Доместикація — багатопоколінна біологічна зміна популяцій під впливом людського відбору.">
+      <div class="content--full">
+        <p class="kicker" data-reveal style="--i:0">Понятійна точність</p>
+        <h2 data-reveal style="--i:1">Три процеси, які не можна зливати</h2>
+        <div class="concept-trio">
+          <article class="concept" data-number="1" data-reveal style="--i:2"><h3>Осілість</h3><p>Збільшення тривалості перебування в певному місці; допускає сезонні переміщення частини групи.</p></article>
+          <article class="concept" data-number="2" data-reveal style="--i:3"><h3>Культивування</h3><p>Догляд, висівання, відбір і захист корисних рослин — ще не обов’язково повна доместикація.</p></article>
+          <article class="concept" data-number="3" data-reveal style="--i:4"><h3>Доместикація</h3><p>Багатопоколінні біологічні зміни рослин і тварин під впливом людського відбору.</p></article>
+        </div>
+        <div class="academic-note" data-reveal style="--i:5"><strong>Методична заборона:</strong> один вид зерна або одна довговічна споруда не визначають повний спосіб життя спільноти.</div>
+      </div>
+    </section>
+
+    <section class="slide slide--mist" data-title="Множинні траєкторії" data-note="Дзьомон — довга й регіонально різноманітна традиція Японського архіпелагу. Її не слід зводити до одного способу життя; вона корисна як порівняння, що кераміка, тривалі поселення й складні символічні форми могли поєднуватися з полюванням, рибальством і збиральництвом.">
+      <div class="content--full">
+        <p class="kicker" data-reveal style="--i:0">Порівняльна перспектива</p>
+        <h2 data-reveal style="--i:1">Різні регіони — різні комбінації</h2>
+        <div class="culture-strip">
+          <div class="culture-list">
+            <div class="culture-item" data-reveal style="--i:2"><strong>Південно-Західна Азія</strong><span>Тривале використання диких злаків, осілі й напівосілі поселення, культивування та доместикація складалися нерівномірно.</span></div>
+            <div class="culture-item" data-reveal style="--i:3"><strong>Японський архіпелаг · Дзьомон</strong><span>Кераміка й тривалі місця проживання не означали автоматичного переходу до зернового землеробства.</span></div>
+            <div class="culture-item" data-reveal style="--i:4"><strong>Український лісостеп · Трипілля</strong><span>Великі поселення й складне планування порушують питання про координацію без простої формули «місто = держава».</span></div>
+          </div>
+          <div class="mini-art" data-reveal style="--i:3">
+            <img src="https://cdn2.picryl.com/photo/2023/01/12/collections_in_japan_by_museum-40b4dd-640.JPG" loading="lazy" alt="Керамічні посудини культури Дзьомон у музейній експозиції">
+            <p>Кераміка Дзьомон · музейна експозиція, Японія · зображення через PICRYL</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--paper" data-title="Історіографічна дискусія" data-note="Чайлд корисний як історія проблеми, але його рання оазисна гіпотеза не є універсальним поясненням. Сучасні дослідження поєднують локальні дані про клімат, демографію, нішеве конструювання, соціальну конкуренцію та гостинність. Натисніть вкладки.">
+      <div class="content--full">
+        <p class="kicker" data-reveal style="--i:0">Історіографія</p>
+        <h2 data-reveal style="--i:1">Чому люди почали виробляти їжу?</h2>
+        <div class="theory-tabs" data-reveal style="--i:2">
+          <div class="theory-tabs__nav" role="tablist" aria-label="Пояснювальні моделі">
+            <button class="theory-tab is-active" type="button" role="tab" aria-selected="true" data-theory="pressure">Ризик і демографія</button>
+            <button class="theory-tab" type="button" role="tab" aria-selected="false" data-theory="niche">Нішеве конструювання</button>
+            <button class="theory-tab" type="button" role="tab" aria-selected="false" data-theory="feast">Престиж і бенкети</button>
+          </div>
+          <article class="theory-panel is-active" data-panel="pressure"><p class="position">Локальний тиск і сезонний ризик</p><h3>Інтенсивніше управління ресурсами могло ставати вигідним навіть за більшої праці.</h3><p>Але демографічний тиск і дефіцит потрібно доводити для конкретної місцевості, а не приймати як універсальну причину.</p><footer>Питання до джерел: чи видно зміну щільності населення, раціону й доступної території?</footer></article>
+          <article class="theory-panel" data-panel="niche"><p class="position">Поступова зміна середовища</p><h3>Люди не лише пристосовувались до екології — вони її перебудовували.</h3><p>Випалювання, прополювання, відбір насіння, охорона видів і повторні повернення могли створювати нові екологічні ніші.</p><footer>Питання до джерел: які сліди довготривалого втручання відрізняються від випадкового збору?</footer></article>
+          <article class="theory-panel" data-panel="feast"><p class="position">Соціальна конкуренція та гостинність</p><h3>Накопичення їжі могло підтримувати бенкети, союзи, престиж і мобілізацію праці.</h3><p>Символічна мотивація не скасовує енергетичних витрат, екологічних обмежень і нерівного доступу.</p><footer>Питання до джерел: чи є спеціальні посудини, скупчення решток, масштаб приготування або простір зібрання?</footer></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--deep" data-title="Ґьобеклі-Тепе" data-note="ЮНЕСКО датує монументальні споруди приблизно 9600–8200 роками до н. е. Архітектура доводить планування, переміщення каменю та кооперацію. Вона не є документом державного апарату й не дає назв божеств.">
+      <div class="slide-grid">
+        <div class="content">
+          <p class="kicker" data-reveal style="--i:0">Анатолія · 9600–8200 рр. до н. е.</p>
+          <h2 data-reveal style="--i:1">Монументальна кооперація до державності</h2>
+          <p class="lead" data-reveal style="--i:2">Т-подібні стовпи, рельєфи й великі споруди засвідчують планування, спільну працю та повторювані правила.</p>
+          <div class="academic-note" data-reveal style="--i:3"><strong>Коректний висновок:</strong> спеціальні громадські практики могли мобілізувати працю раніше, ніж сформувався державний адміністративний апарат.</div>
+        </div>
+        <figure class="art" data-reveal style="--i:2">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Göbeklitepe_Building_C_5309.jpg" loading="lazy" alt="Монументальна споруда C у Ґьобеклі-Тепе">
+          <figcaption>Споруда C, Ґьобеклі-Тепе · <a href="https://commons.wikimedia.org/wiki/File:Göbeklitepe_Building_C_5309.jpg" target="_blank" rel="noopener">Dosseman / Wikimedia Commons</a></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="slide slide--paper" data-title="Близьке читання джерела" data-note="Е. Беннінґ застерігав від жорсткого поділу на «храм» і «дім». Пізніші знахідки немонументальних споруд ускладнили образ ізольованого святилища. Важливо не перетворювати зображення тварин на точний словник вірувань.">
+      <div class="slide-grid slide-grid--wide">
+        <div class="content">
+          <p class="kicker" data-reveal style="--i:0">Джерелознавство</p>
+          <h2 data-reveal style="--i:1">Що саме говорить камінь?</h2>
+          <div class="claim-grid">
+            <article class="claim" data-reveal style="--i:2"><b>Джерело</b><p>Матеріал, форма, розташування, сліди обробки, рельєф.</p></article>
+            <article class="claim" data-reveal style="--i:3"><b>Інтерпретація</b><p>Спеціальні громадські події та ймовірні ритуальні практики.</p></article>
+            <article class="claim claim--warn" data-reveal style="--i:4"><b>Не доведено</b><p>Назви божеств, завершене віровчення, політична конституція.</p></article>
+          </div>
+        </div>
+        <figure class="art" data-reveal style="--i:2">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Reliefs_of_animals,_Göbekli_Tepe_Layer_III,_circa_9000_BCE.jpg" loading="lazy" alt="Рельєфи тварин на стовпі Ґьобеклі-Тепе">
+          <figcaption>Рельєфи тварин, шар III · <a href="https://commons.wikimedia.org/wiki/File:Reliefs_of_animals,_Göbekli_Tepe_Layer_III,_circa_9000_BCE.jpg" target="_blank" rel="noopener">Klaus-Peter Simon / Wikimedia Commons, CC BY-SA 3.0</a></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="slide slide--red" data-title="Межа надмірного висновку" data-note="Фраза «релігія створила цивілізацію» надмірна з трьох причин: зміст символів не відомий повністю; один чинник перетворено на універсальну причину; поняття «цивілізація» лишається невизначеним. Замініть її скромнішим висновком на слайді.">
+      <div class="content--full">
+        <p class="kicker" data-reveal style="--i:0">Критичний фільтр</p>
+        <h2 data-reveal style="--i:1">«Релігія створила цивілізацію» — ефектно, але недоказово</h2>
+        <div class="claim-grid">
+          <article class="claim" data-reveal style="--i:2"><b>Проблема 1</b><p>Невідомий зміст символів оголошено готовою релігійною системою.</p></article>
+          <article class="claim" data-reveal style="--i:3"><b>Проблема 2</b><p>Один можливий чинник перетворено на універсальну причину.</p></article>
+          <article class="claim" data-reveal style="--i:4"><b>Проблема 3</b><p>«Цивілізація» використана без критеріїв і хронологічної межі.</p></article>
+        </div>
+        <div class="academic-note" data-reveal style="--i:5"><strong>Натомість:</strong> Ґьобеклі-Тепе ускладнює модель, у якій монумент і ритуал можливі лише після землеробського села та держави.</div>
+      </div>
+    </section>
+
+    <section class="slide slide--paper" data-title="Осілість: здобутки й витрати" data-note="Біоархеологічні дані в багатьох, але не всіх ранньоземлеробських контекстах показують інфекції, харчовий стрес, карієс і сліди повторюваної праці. Не перетворюйте це на універсальний закон занепаду здоров’я: наслідки залежать від місця, раціону, санітарії, віку, статі та статусу.">
+      <div class="content--full">
+        <p class="kicker" data-reveal style="--i:0">Якість життя</p>
+        <h2 data-reveal style="--i:1">Осілість створює компроміси</h2>
+        <div class="tradeoff">
+          <article class="tradeoff-card" data-reveal style="--i:2"><h3>Нові можливості</h3><ul><li>зберігання важких знарядь і запасів;</li><li>довговічна інфраструктура;</li><li>щільніший обмін навичками;</li><li>колективна оборона й догляд.</li></ul></article>
+          <article class="tradeoff-card tradeoff-card--cost" data-reveal style="--i:3"><h3>Нові ризики</h3><ul><li>концентрація відходів і збудників хвороб;</li><li>залежність від локального врожаю;</li><li>конфлікти за землю та воду;</li><li>нерівний доступ до комори й стада.</li></ul></article>
+        </div>
+        <p class="academic-note" data-reveal style="--i:4"><strong>Наукова формула:</strong> не «краще або гірше», а нерівномірно розподілені наслідки в конкретних умовах.</p>
+      </div>
+    </section>
+
+    <section class="slide slide--navy" data-title="Механізм запасу" data-note="Запас сам собою не створює державу. Натисніть елементи ланцюга. Для стійкої влади потрібні правила власності, одиниці міри, охорона, легітимність розподілу й здатність домагатися виконання рішень.">
+      <div class="content--full">
+        <p class="kicker" data-reveal style="--i:0">Інституційний механізм</p>
+        <h2 data-reveal style="--i:1">Як зерно може стати владою?</h2>
+        <p class="lead" data-reveal style="--i:2">Натискайте елементи: кожен крок потребує соціального правила, а не виникає автоматично.</p>
+        <div class="mechanism" data-reveal style="--i:3">
+          <button class="mechanism-node is-active" type="button" data-explain="Запас переносить частину ресурсу в майбутнє і створює питання доступу.">Запас</button><b class="mechanism-arrow">→</b>
+          <button class="mechanism-node" type="button" data-explain="Облік робить кількість порівнюваною, але залежить від категорій і довіри до рахівника.">Облік</button><b class="mechanism-arrow">→</b>
+          <button class="mechanism-node" type="button" data-explain="Норма визначає, що вважається часткою, боргом, внеском або порушенням.">Норма</button><b class="mechanism-arrow">→</b>
+          <button class="mechanism-node" type="button" data-explain="Контроль потребує процедури перевірки, санкції та визнаного права втручатися.">Контроль</button><b class="mechanism-arrow">→</b>
+          <button class="mechanism-node" type="button" data-explain="Влада стає стійкою, коли право розподіляти ресурс визнають, успадковують або підтримують примусом.">Влада</button>
+        </div>
+        <div class="mechanism-explain" id="mechanismExplain" aria-live="polite">Запас переносить частину ресурсу в майбутнє і створює питання доступу.</div>
+      </div>
+    </section>
+
+    <section class="slide slide--mist" data-title="Час, міра, календар" data-note="Календар і міра — не нейтральні технічні додатки. Вони створюють спільні очікування: коли працювати, скільки внести, коли повернути борг. Те саме правило підтримує координацію і може робити повинність контрольованою.">
+      <div class="content--full">
+        <p class="kicker" data-reveal style="--i:0">Культура координації</p>
+        <h2 data-reveal style="--i:1">Календар, рахунок і міра організують майбутнє</h2>
+        <div class="time-grid">
+          <article class="time-card" data-reveal style="--i:2"><span class="icon">◷</span><h3>Календар</h3><p>Узгоджує строки сівби, зібрань, ритуалів і повинностей.</p></article>
+          <article class="time-card" data-reveal style="--i:3"><span class="icon">#</span><h3>Рахунок</h3><p>Перетворює повторювані дії на порівнювані кількості й серії.</p></article>
+          <article class="time-card" data-reveal style="--i:4"><span class="icon">↔</span><h3>Міра</h3><p>Створює стандарт обміну, частки й відповідальності — та поле конфлікту.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--deep" data-title="Український кейс: Небелівка" data-note="Небелівка на Кіровоградщині — трипільське мегапоселення початку IV тисячоліття до н. е. Геофізичний план показує концентричні контури, радіальні вулиці, квартали й великі споруди. Він не доводить одночасне проживання всіх будинків або існування централізованої держави.">
+      <div class="slide-grid">
+        <div class="content">
+          <p class="kicker" data-reveal style="--i:0">Україна · початок IV тис. до н. е.</p>
+          <h2 data-reveal style="--i:1">Небелівка: велике поселення без простої етикетки</h2>
+          <p class="lead" data-reveal style="--i:2">Геофізика відкрила план із понад тисячею структур, кільцевою організацією, кварталами та великими будівлями.</p>
+          <div class="academic-note" data-reveal style="--i:3"><strong>Питання, а не вирок:</strong> чи були ці структури одночасно заселені, сезонно активовані або пов’язані з різними групами?</div>
+        </div>
+        <figure class="art art--diagram" data-reveal style="--i:2">
+          <img src="https://www.frontiersin.org/files/Articles/434429/xml-images/fdigh-06-00010-g0009.webp" loading="lazy" alt="Геофізичний план трипільського мегапоселення Небелівка">
+          <figcaption>Геофізичний план Небелівки · <a href="https://www.frontiersin.org/journals/digital-humanities/articles/10.3389/fdigh.2019.00010/full" target="_blank" rel="noopener">Chapman et al., Frontiers, CC BY</a></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="slide slide--paper" data-title="Межі поняття протомісто" data-note="У публікаціях трапляється поняття proto-town, але воно є аналітичною пропозицією, а не самоназвою мешканців. Найбезпечніше описувати вимірювані ознаки плану й окремо дискутувати, чи достатні вони для категорії міста.">
+      <div class="content--full">
+        <p class="kicker" data-reveal style="--i:0">Небелівка · критика категорій</p>
+        <h2 data-reveal style="--i:1">Великий масштаб ще не дорівнює державі</h2>
+        <div class="caution-stack">
+          <div class="caution-row" data-reveal style="--i:2"><b>Підтверджено</b><p>Планування простору, групи споруд, радіальні проходи, великі будівлі, сліди спалення.</p></div>
+          <div class="caution-row" data-reveal style="--i:3"><b>Інтерпретується</b><p>«Квартали», місця зібрання, ритм перебування, взаємодія домогосподарств.</p></div>
+          <div class="caution-row" data-reveal style="--i:4"><b>Дискутується</b><p>Чисельність одночасного населення, тривалість повної забудови, міський статус.</p></div>
+          <div class="caution-row" data-reveal style="--i:5"><b>Не випливає</b><p>Єдиний правитель, податковий апарат або класична держава лише з геометрії плану.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--mist" data-title="Трипільський дім як модель" data-note="Глиняна модель не є фотографією реального будинку. Вона є артефактом, форма якого дозволяє ставити питання про уявлення простору, побут і символічне представлення дому. Потрібно зіставляти її з археологічними залишками споруд.">
+      <div class="slide-grid">
+        <div class="content">
+          <p class="kicker" data-reveal style="--i:0">Українські землі · матеріальна культура</p>
+          <h2 data-reveal style="--i:1">Дім стає не лише місцем, а й образом</h2>
+          <p class="lead" data-reveal style="--i:2">Глиняні моделі трипільських споруд зберігають не готовий «план поверху», а культурно відібране уявлення про організований простір.</p>
+          <div class="claim-grid" data-reveal style="--i:3">
+            <article class="claim"><b>Носій</b><p>Випалена глина.</p></article>
+            <article class="claim"><b>Дія</b><p>Моделювання й показ простору.</p></article>
+            <article class="claim claim--warn"><b>Межа</b><p>Не буквальна копія кожного житла.</p></article>
+          </div>
+        </div>
+        <figure class="art" data-reveal style="--i:2">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Trypillian_house3.jpg" loading="lazy" alt="Глиняна модель трипільського житла">
+          <figcaption>Глиняна модель трипільського житла · <a href="https://commons.wikimedia.org/wiki/File:Trypillian_house3.jpg" target="_blank" rel="noopener">Giorgiomonteforti / Wikimedia Commons, public domain</a></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="slide slide--deep" data-title="Трипільська кераміка" data-note="Орнамент не слід автоматично перекладати як письмо або конкретний міф. Кераміка свідчить про технологію, навички, візуальну повторюваність, обмін формами й соціальні практики використання посуду. Точне значення окремих мотивів часто дискусійне.">
+      <div class="slide-grid">
+        <div class="content">
+          <p class="kicker" data-reveal style="--i:0">Культурний слід</p>
+          <h2 data-reveal style="--i:1">Орнамент створює впізнаваність — не словник із готовим перекладом</h2>
+          <p class="lead" data-reveal style="--i:2">Повторювані форми й композиції можуть підтримувати навчання, групову належність і зв’язок між поселеннями.</p>
+          <div class="academic-note" data-reveal style="--i:3"><strong>Межа доказу:</strong> візуальна подібність є підставою досліджувати передачу стилю, але не автоматично реконструювати «релігію трипільців».</div>
+        </div>
+        <figure class="art" data-reveal style="--i:2">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Кераміка_Трипільської_культури,_20231223_01.jpg" loading="lazy" alt="Кераміка трипільської культури в музейній експозиції">
+          <figcaption>Кераміка трипільської культури · <a href="https://commons.wikimedia.org/wiki/File:Кераміка_Трипільської_культури,_20231223_01.jpg" target="_blank" rel="noopener">Wikimedia Commons, ліцензія на сторінці файлу</a></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="slide slide--paper" data-title="Усна й документальна пам’ять" data-note="Не описуйте усну пам’ять як недосконалу копію письма. Вона підтримується формулами, ритмом, повторенням, оповідями, родоводами й авторитетом виконавців. Документ набуває сили лише через форму, процедуру зберігання та очікуваний наслідок.">
+      <div class="content--full">
+        <p class="kicker" data-reveal style="--i:0">Пам’ять</p>
+        <h2 data-reveal style="--i:1">Документ не замінює пам’ять — він змінює її режим</h2>
+        <div class="memory-compare">
+          <article class="memory-card" data-reveal style="--i:2"><h3>Усна пам’ять</h3><ul><li>живе у виконанні та взаємодії;</li><li>адаптується до ситуації;</li><li>спирається на носіїв і колективне виправлення;</li><li>може діяти на великій відстані через мережі.</li></ul></article>
+          <div class="memory-bridge" data-reveal style="--i:3">↔</div>
+          <article class="memory-card" data-reveal style="--i:4"><h3>Документальна пам’ять</h3><ul><li>відокремлює запис від автора;</li><li>підтримує перевірку й серійність;</li><li>потребує форми, архіву й процедури;</li><li>посилює владу того, хто класифікує.</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--deep" data-title="Протоклинописний Урук" data-note="Наприкінці IV тисячоліття до н. е. в Уруку та пов’язаних центрах використовували глиняні таблички з числовими й протоклинописними знаками. Це комплекс адміністративних записів і списків, а не одна «перша книга».">
+      <div class="slide-grid">
+        <div class="content">
+          <p class="kicker" data-reveal style="--i:0">Урук · кінець IV тис. до н. е.</p>
+          <h2 data-reveal style="--i:1">Коли ресурс стає записом</h2>
+          <p class="lead" data-reveal style="--i:2">Кількість, вид товару й операцію можна відокремити від особистої пам’яті та перевірити в межах організації.</p>
+          <div class="stat-row" data-reveal style="--i:3"><div class="stat"><b>глина</b><span>довговічний матеріальний носій</span></div><div class="stat"><b>знак</b><span>стандартизована категорія</span></div><div class="stat"><b>архів</b><span>пам’ять довша за посаду</span></div></div>
+        </div>
+        <figure class="art" data-reveal style="--i:2">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/P1150884_Louvre_Uruk_III_tablette_écriture_précunéiforme_AO19936_rwk.jpg" loading="lazy" alt="Табличка з протоклинописним записом доби Урук III">
+          <figcaption>Протоклинописна табличка, Урук III · <a href="https://commons.wikimedia.org/wiki/File:P1150884_Louvre_Uruk_III_tablette_écriture_précunéiforme_AO19936_rwk.jpg" target="_blank" rel="noopener">Louvre / Wikimedia Commons, CC BY 3.0</a></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="slide slide--mist" data-title="Класифікація й невидимість" data-note="Адміністрація може системно контролювати лише те, що навчилася розрізняти й рахувати. Це не означає, що поза таблицею нічого не існувало. Натисніть кнопку, щоб показати соціальний досвід, який облікова форма може не фіксувати.">
+      <div class="content--full">
+        <p class="kicker" data-reveal style="--i:0">Критика документа</p>
+        <h2 data-reveal style="--i:1">Що стає видимим — і що зникає?</h2>
+        <div class="ledger">
+          <div class="ledger-sheet" data-reveal style="--i:2" aria-label="Умовний приклад облікової таблиці">
+            <div class="ledger-row"><span>Категорія</span><span>Кількість</span><span>Операція</span></div>
+            <div class="ledger-row"><span>Ячмінь</span><span>24 міри</span><span>видано</span></div>
+            <div class="ledger-row"><span>Працівники</span><span>8 осіб</span><span>пайок</span></div>
+            <div class="ledger-row"><span>Посуд</span><span>12 шт.</span><span>прийнято</span></div>
+          </div>
+          <div class="ledger-control" data-reveal style="--i:3">
+            <button class="reveal-button" id="ledgerReveal" type="button" aria-expanded="false">Показати невидиме для обліку</button>
+            <div class="ledger-absent" id="ledgerAbsent">Домовленості, примус, втома, конфлікт, голос виконавця, неоплачена праця, те, що не ввійшло до категорій.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--navy" data-title="Інституційна пам’ять" data-note="Не кожний знак є документом. Документом запис стає тоді, коли має впізнавану форму, автора або установу, процедуру зберігання та очікуваний наслідок. Серія документів створює архів, а архів підтримує організацію після зміни людей.">
+      <div class="content--full">
+        <p class="kicker" data-reveal style="--i:0">Від запису до установи</p>
+        <h2 data-reveal style="--i:1">Пам’ять стає інституційною поетапно</h2>
+        <div class="memory-chain" data-reveal style="--i:2"><span>Усне свідчення</span><b>→</b><span>Зовнішній знак</span><b>→</b><span>Стандартизований документ</span><b>→</b><span>Архів</span><b>→</b><span>Рішення після зміни людей</span></div>
+        <div class="academic-note" data-reveal style="--i:3"><strong>Влада документа</strong> походить не з матеріалу самого по собі, а з процедур визнання, читання, зберігання й виконання.</div>
+      </div>
+    </section>
+
+    <section class="slide slide--deep" data-title="Міфи про потоп" data-note="Месопотамські традиції потопу відомі в кількох версіях. Дата конкретної музейної таблички не дорівнює даті виникнення сюжету. Писарі копіювали, редагували й переосмислювали давніші традиції.">
+      <div class="slide-grid">
+        <div class="content">
+          <p class="kicker" data-reveal style="--i:0">Культурна пам’ять</p>
+          <h2 data-reveal style="--i:1">Потоп як спосіб осмислити катастрофу</h2>
+          <p class="lead" data-reveal style="--i:2">Текст перетворює руйнування на морально й космологічно впорядковану оповідь: попередження, порятунок, межу людського життя, відновлення порядку.</p>
+          <div class="academic-note" data-reveal style="--i:3"><strong>Не плутати:</strong> міфологічний текст засвідчує оповідь і її смисли, але не є прямим геологічним протоколом події.</div>
+        </div>
+        <figure class="art" data-reveal style="--i:2">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/British_Museum_Flood_Tablet_1.jpg" loading="lazy" alt="XI таблиця Епосу про Гільгамеша з оповіддю про потоп">
+          <figcaption>«Табличка потопу», XI таблиця «Епосу про Гільгамеша» · <a href="https://www.britishmuseum.org/collection/object/W_K-3375" target="_blank" rel="noopener">British Museum, K.3375</a></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="slide slide--paper" data-title="Три типи джерел" data-note="Локальний археологічний шар повені, текст про потоп і пізніша культурна пам’ять — різні типи джерел. Їх можна зіставляти, але не підміняти одне одним. Схожість сюжетів відкриває питання передачі мотивів, а не автоматично доводить одну глобальну подію.">
+      <div class="content--full">
+        <p class="kicker" data-reveal style="--i:0">Методологічна межа</p>
+        <h2 data-reveal style="--i:1">Зіставляти — не означає ототожнювати</h2>
+        <div class="source-types">
+          <article class="source-type" data-reveal style="--i:2"><strong>Археологічний шар</strong><p>Матеріальний слід локальної події в конкретному місці й часі.</p><small>Потребує стратиграфії, датування, геологічного контексту.</small></article>
+          <article class="source-type" data-reveal style="--i:3"><strong>Текст про потоп</strong><p>Літературна форма, сюжет, моральний і космологічний порядок.</p><small>Потребує аналізу жанру, редакції, мови й аудиторії.</small></article>
+          <article class="source-type" data-reveal style="--i:4"><strong>Пізніша пам’ять</strong><p>Передавання, канонізація, переписування й нове використання мотиву.</p><small>Потребує історії рецепції, а не пошуку «незмінного ядра».</small></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--navy" data-title="Порівняння кейсів" data-note="Це порівняння не встановлює прямої історичної спадкоємності між кейсами. Спільна рамка — тип координації, матеріальний носій, межа доказу. Кожен випадок має власну хронологію і регіональний контекст.">
+      <div class="content--full">
+        <p class="kicker" data-reveal style="--i:0">Синтез без рейтингу</p>
+        <h2 data-reveal style="--i:1">П’ять культурних слідів — п’ять різних питань</h2>
+        <div class="case-matrix">
+          <article class="case" data-reveal style="--i:2"><b>Межиріч</b><strong>Архітектура мобільних груп</strong><p>Як планування й матеріальна пам’ять працюють без землеробства?</p></article>
+          <article class="case" data-reveal style="--i:3"><b>Дзьомон</b><strong>Кераміка без простої стадії</strong><p>Чому технологія не визначає один господарський режим?</p></article>
+          <article class="case" data-reveal style="--i:4"><b>Ґьобеклі-Тепе</b><strong>Монументальна кооперація</strong><p>Що можна довести про спільну дію до державності?</p></article>
+          <article class="case" data-reveal style="--i:5"><b>Небелівка</b><strong>Масштаб і планування</strong><p>Коли велике поселення ще не дорівнює державному місту?</p></article>
+          <article class="case" data-reveal style="--i:6"><b>Урук</b><strong>Документ і архів</strong><p>Як класифікація розширює координацію й інформаційну владу?</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--paper" data-title="Трансформація духовної культури" data-note="Головний підсумок теми: зростання організаційної потужності й можливостей контролю — дві сторони того самого процесу. Календар координує працю і визначає строк повинності; міра робить обмін передбачуваним і дозволяє стягувати частку; документ зберігає зобов’язання й привілеює офіційну версію.">
+      <div class="content--full">
+        <p class="kicker" data-reveal style="--i:0">Трансформація</p>
+        <h2 data-reveal style="--i:1">Організаційна потужність і контроль зростають разом</h2>
+        <div class="dual-result">
+          <article class="result-card" data-reveal style="--i:2"><span class="tag">Координація</span><h3>Більше людей можуть діяти в довшому часі</h3><p>Запас, календар, міра, спільне місце й архів підтримують планування, довіру та передавання досвіду.</p></article>
+          <article class="result-card result-card--power" data-reveal style="--i:3"><span class="tag">Контроль</span><h3>Більше дій стають обліковуваними</h3><p>Категорії, доступ до ресурсу, право запису й санкція створюють нерівність компетентностей і влади.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--mist" data-title="Самоперевірка" data-note="Дайте студентам 3–4 хвилини. Правильні відповіді: 1 — осілість може поєднуватися із сезонною мобільністю; 2 — архітектура доводить кооперацію, але не точне віровчення; 3 — документ стає інституційним через форму, зберігання й наслідок.">
+      <div class="content--full">
+        <p class="kicker" data-reveal style="--i:0">Самоперевірка</p>
+        <h2 data-reveal style="--i:1">Виберіть академічно коректну відповідь</h2>
+        <div class="quiz">
+          <article class="quiz-card" data-reveal style="--i:2"><p>Осілість означає…</p><div class="quiz-options"><button class="quiz-option" data-correct="true">триваліше перебування в місці, інколи із сезонною мобільністю</button><button class="quiz-option">повну відмову від будь-яких переміщень</button></div><div class="quiz-feedback" aria-live="polite"></div></article>
+          <article class="quiz-card" data-reveal style="--i:3"><p>Ґьобеклі-Тепе прямо доводить…</p><div class="quiz-options"><button class="quiz-option">назви божеств і політичну конституцію</button><button class="quiz-option" data-correct="true">масштабну кооперацію та спеціальні споруди</button></div><div class="quiz-feedback" aria-live="polite"></div></article>
+          <article class="quiz-card" data-reveal style="--i:4"><p>Запис стає документом, коли…</p><div class="quiz-options"><button class="quiz-option">його зроблено на довговічному матеріалі</button><button class="quiz-option" data-correct="true">він має форму, процедуру зберігання й очікуваний наслідок</button></div><div class="quiz-feedback" aria-live="polite"></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--deep" data-title="Аналітичне завдання" data-note="Завдання адаптоване з §2.14 конспекту. Вимагайте явних мовних маркерів рівня доказовості. Студент не має заповнювати прогалини красивою історією: цінність роботи — у дисциплінованій межі висновку.">
+      <div class="content--full">
+        <p class="kicker" data-reveal style="--i:0">Після лекції</p>
+        <h2 data-reveal style="--i:1">Порівняйте два режими координації</h2>
+        <div class="assignment">
+          <article class="assignment-card" data-reveal style="--i:2"><h3>Ґьобеклі-Тепе</h3><ol><li>матеріальний носій;</li><li>підтверджені дії;</li><li>переважна інтерпретація;</li><li>дискусійна гіпотеза;</li><li>межа джерела.</li></ol></article>
+          <article class="assignment-card" data-reveal style="--i:3"><h3>Протоклинописний Урук</h3><ol><li>матеріальний носій;</li><li>підтверджені дії;</li><li>переважна інтерпретація;</li><li>дискусійна гіпотеза;</li><li>межа джерела.</li></ol></article>
+        </div>
+        <div class="rubric" data-reveal style="--i:4"><span>точність понять</span><span>рівень доказовості</span><span>порівняння механізмів</span><span>коректна межа висновку</span></div>
+      </div>
+    </section>
+
+    <section class="slide slide--navy" data-title="Джерела" data-note="Основою є конспект курсу, тема 2, §2.1–2.15. Додані українські кейси працюють як порівняльне розширення і не замінюють центральні приклади конспекту. Усі зображення мають підписи й посилання на джерела або сторінки ліцензій.">
+      <div class="content--full">
+        <p class="kicker" data-reveal style="--i:0">Академічна основа</p>
+        <h2 data-reveal style="--i:1">Конспект, першоджерела й дослідження</h2>
+        <ul class="sources" data-reveal style="--i:2">
+          <li><a href="https://drive.google.com/file/d/1EzWJMiwLLEr9JV7Av-wa8kOskfPPRBDv/view" target="_blank" rel="noopener">«Основи духовної культури», частина 1, тема 2, §2.1–2.15</a></li>
+          <li><a href="https://whc.unesco.org/en/list/1572/" target="_blank" rel="noopener">UNESCO World Heritage Centre. Göbekli Tepe</a></li>
+          <li>Banning, E. B. “So Fair a House…” Current Anthropology 52(5), 2011.</li>
+          <li>Dietrich, O. et al. “The role of cult and feasting…” Antiquity 86, 2012.</li>
+          <li>Zeder, M. A. “Unpacking the Neolithic.” Journal of World Prehistory, 2025.</li>
+          <li>Larsen, C. S. “Biological Changes in Human Populations with Agriculture.” 1995.</li>
+          <li><a href="https://cdli.earth/" target="_blank" rel="noopener">Cuneiform Digital Library Initiative</a> · Englund, R. K. “Accounting in Proto-Cuneiform.”</li>
+          <li><a href="https://www.metmuseum.org/toah/hd/wrtg/hd_wrtg.htm" target="_blank" rel="noopener">The Metropolitan Museum of Art. The Origins of Writing</a></li>
+          <li><a href="https://www.britishmuseum.org/collection/object/W_K-3375" target="_blank" rel="noopener">The British Museum. The Flood Tablet, K.3375</a></li>
+          <li>Chen, Y. S. The Primeval Flood Catastrophe. Oxford University Press, 2013.</li>
+          <li><a href="https://antiquity.ac.uk/projgall/chapman339" target="_blank" rel="noopener">Chapman et al. Geophysical plan of the Trypillia mega-site of Nebelivka</a></li>
+          <li><a href="https://www.encyclopediaofukraine.com/display.asp?linkpath=pages%5CM%5CE%5CMezhyricharcheologicalsite.htm" target="_blank" rel="noopener">Internet Encyclopedia of Ukraine. Mezhyrich archaeological site</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <aside class="notes" id="notes" aria-label="Нотатки викладача" aria-hidden="true">
+    <button class="notes__close" id="notesClose" type="button" aria-label="Закрити нотатки">×</button>
+    <h3>Пояснення до слайда</h3>
+    <p id="noteText"></p>
+  </aside>
+
+  <nav class="deck-nav" aria-label="Навігація між слайдами">
+    <button id="prevButton" type="button">← <span>Назад</span></button>
+    <div class="counter" id="counter">1 / 30</div>
+    <div class="progress-wrap"><div class="progress-label" id="progressLabel">Обкладинка</div><div class="progress" aria-hidden="true"><i id="progressBar"></i></div></div>
+    <button id="nextButton" type="button"><span>Далі</span> →</button>
+  </nav>
+
+  <dialog id="overviewDialog">
+    <div class="overview-head"><h2>Огляд лекції</h2><button type="button" id="overviewClose" aria-label="Закрити огляд">×</button></div>
+    <div class="overview-grid" id="overviewGrid"></div>
+  </dialog>
+
+  <script>
+    const slides=[...document.querySelectorAll('.slide')];
+    const counter=document.getElementById('counter');
+    const progressBar=document.getElementById('progressBar');
+    const progressLabel=document.getElementById('progressLabel');
+    const prevButton=document.getElementById('prevButton');
+    const nextButton=document.getElementById('nextButton');
+    const notes=document.getElementById('notes');
+    const notesButton=document.getElementById('notesButton');
+    const noteText=document.getElementById('noteText');
+    const overviewDialog=document.getElementById('overviewDialog');
+    const overviewGrid=document.getElementById('overviewGrid');
+    let index=0;
+
+    function closeNotes(){document.body.classList.remove('notes-open');notesButton.setAttribute('aria-expanded','false');notes.setAttribute('aria-hidden','true')}
+    function showSlide(next,{updateHash=true}={}){
+      const target=Math.max(0,Math.min(slides.length-1,next));
+      slides[index].classList.remove('active');
+      index=target;
+      slides[index].classList.add('active');
+      counter.textContent=`${index+1} / ${slides.length}`;
+      progressBar.style.width=`${((index+1)/slides.length)*100}%`;
+      progressLabel.textContent=slides[index].dataset.title||`Слайд ${index+1}`;
+      noteText.textContent=slides[index].dataset.note||'Додаткових нотаток немає.';
+      prevButton.disabled=index===0;
+      nextButton.disabled=index===slides.length-1;
+      if(updateHash)history.replaceState(null,'',`#s${index+1}`);
+      closeNotes();
+      document.title=`${slides[index].dataset.title} — Мобільність, осілість і ранні інституції`;
+      window.scrollTo({top:0,behavior:'instant'});
+    }
+
+    prevButton.addEventListener('click',()=>showSlide(index-1));
+    nextButton.addEventListener('click',()=>showSlide(index+1));
+    notesButton.addEventListener('click',()=>{const open=!document.body.classList.contains('notes-open');document.body.classList.toggle('notes-open',open);notesButton.setAttribute('aria-expanded',String(open));notes.setAttribute('aria-hidden',String(!open))});
+    document.getElementById('notesClose').addEventListener('click',closeNotes);
+
+    document.getElementById('fullscreenButton').addEventListener('click',async()=>{
+      if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();
+    });
+    document.addEventListener('fullscreenchange',()=>document.getElementById('fullscreenButton').setAttribute('aria-pressed',String(Boolean(document.fullscreenElement))));
+
+    slides.forEach((slide,i)=>{
+      const button=document.createElement('button');
+      button.className='overview-item';
+      button.type='button';
+      button.innerHTML=`<span>${String(i+1).padStart(2,'0')}</span><strong>${slide.dataset.title||`Слайд ${i+1}`}</strong>`;
+      button.addEventListener('click',()=>{overviewDialog.close();showSlide(i)});
+      overviewGrid.append(button);
+    });
+    document.getElementById('overviewButton').addEventListener('click',()=>overviewDialog.showModal());
+    document.getElementById('overviewClose').addEventListener('click',()=>overviewDialog.close());
+
+    document.querySelectorAll('.evidence-card').forEach(card=>card.addEventListener('click',()=>{card.classList.toggle('is-open')}));
+    document.querySelectorAll('.theory-tab').forEach(tab=>tab.addEventListener('click',()=>{
+      document.querySelectorAll('.theory-tab').forEach(item=>{item.classList.remove('is-active');item.setAttribute('aria-selected','false')});
+      document.querySelectorAll('.theory-panel').forEach(panel=>panel.classList.remove('is-active'));
+      tab.classList.add('is-active');tab.setAttribute('aria-selected','true');
+      document.querySelector(`[data-panel="${tab.dataset.theory}"]`).classList.add('is-active');
+    }));
+    document.querySelectorAll('.mechanism-node').forEach(node=>node.addEventListener('click',()=>{
+      document.querySelectorAll('.mechanism-node').forEach(item=>item.classList.remove('is-active'));
+      node.classList.add('is-active');
+      document.getElementById('mechanismExplain').textContent=node.dataset.explain;
+    }));
+    document.getElementById('ledgerReveal').addEventListener('click',event=>{
+      const box=document.getElementById('ledgerAbsent');
+      const open=!box.classList.contains('is-visible');
+      box.classList.toggle('is-visible',open);event.currentTarget.setAttribute('aria-expanded',String(open));
+      event.currentTarget.textContent=open?'Сховати невидиме':'Показати невидиме для обліку';
+    });
+    document.querySelectorAll('.quiz-option').forEach(option=>option.addEventListener('click',()=>{
+      const card=option.closest('.quiz-card');
+      card.querySelectorAll('.quiz-option').forEach(item=>item.classList.remove('is-correct','is-wrong'));
+      const correct=option.dataset.correct==='true';
+      option.classList.add(correct?'is-correct':'is-wrong');
+      card.querySelector('.quiz-feedback').textContent=correct?'Так. Формулювання зберігає складність джерел.':'Ні. Це надто категоричне або редукційне твердження.';
+    }));
+    document.querySelectorAll('img').forEach(img=>img.addEventListener('error',()=>{const figure=img.closest('.art');if(figure){img.remove();figure.classList.add('is-error')}}));
+
+    document.addEventListener('keydown',event=>{
+      const tag=event.target.tagName;
+      if(['INPUT','TEXTAREA','SELECT'].includes(tag))return;
+      if(event.key==='ArrowRight'||event.key==='PageDown'||(event.key===' '&&tag!=='BUTTON')){event.preventDefault();showSlide(index+1)}
+      if(event.key==='ArrowLeft'||event.key==='PageUp'){event.preventDefault();showSlide(index-1)}
+      if(event.key==='Home')showSlide(0);
+      if(event.key==='End')showSlide(slides.length-1);
+      if(event.key.toLowerCase()==='n')notesButton.click();
+      if(event.key.toLowerCase()==='f')document.getElementById('fullscreenButton').click();
+      if(event.key.toLowerCase()==='o')overviewDialog.open?overviewDialog.close():overviewDialog.showModal();
+      if(event.key==='Escape')closeNotes();
+    });
+
+    const requested=parseInt(location.hash.replace('#s',''),10)-1;
+    if(Number.isFinite(requested))index=Math.max(0,Math.min(slides.length-1,requested));
+    slides.forEach((slide,i)=>slide.classList.toggle('active',i===index));
+    showSlide(index,{updateHash:false});
+  </script>
+</body>
+</html>
+
+

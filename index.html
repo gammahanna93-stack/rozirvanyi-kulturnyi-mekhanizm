@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Інтерактивний екран викладача для практичного заняття «Розірваний культурний механізм»">
+  <title>Розірваний культурний механізм — практичне заняття №1</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a2742'/%3E%3Ccircle cx='19' cy='32' r='8' fill='%23f28b3c'/%3E%3Ccircle cx='45' cy='32' r='8' fill='%23f7f4ed'/%3E%3Cpath d='M27 32h10' stroke='%23f28b3c' stroke-width='5' stroke-linecap='round' stroke-dasharray='2 5'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#deck">До слайдів</a>
+
+  <header class="hud" aria-label="Панель презентації">
+    <div class="hud__brand">
+      <span class="hud__mark" aria-hidden="true"></span>
+      <span>Основи духовної культури</span>
+    </div>
+    <div class="hud__actions">
+      <button class="quiet-button" id="overviewButton" type="button" aria-label="Відкрити огляд усіх екранів">Огляд</button>
+      <button class="quiet-button" id="fullscreenButton" type="button" aria-label="На весь екран" aria-pressed="false" title="На весь екран · F">⛶</button>
+      <button class="quiet-button quiet-button--teacher" id="teacherButton" type="button" aria-expanded="false" aria-controls="teacherPanel">Для викладача</button>
+    </div>
+  </header>
+
+  <main class="deck" id="deck" aria-live="polite">
+    <section class="slide slide--cover is-active" data-slide="1" aria-hidden="false">
+      <div class="cover-grid">
+        <div class="cover-copy">
+          <p class="kicker reveal-in">Практичне заняття №1</p>
+          <h1 class="cover-title reveal-in"><span>Розірваний</span><span>культурний</span><span class="accent">механізм</span></h1>
+        </div>
+        <div class="cover-brief reveal-in">
+          <div class="cover-index" aria-hidden="true">01</div>
+          <p>Як смисл і цінність стають нормою, практикою та інституцією — і де цей механізм може зламатися?</p>
+          <button class="primary-button" type="button" data-go="2">Почати практику <span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+      <div class="cover-orbit" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    </section>
+
+    <section class="slide slide--light" data-slide="2" aria-hidden="true">
+      <div class="slide-head">
+        <p class="kicker">Пригадаємо лекцію</p>
+        <h2>Як рухається культурний механізм?</h2>
+      </div>
+      <div class="progressive-chain" id="lectureChain" aria-label="Ланцюг культурного механізму">
+        <span class="chain-node is-pending">Смисл</span><span class="chain-arrow is-pending" aria-hidden="true">→</span>
+        <span class="chain-node is-pending">Цінність</span><span class="chain-arrow is-pending" aria-hidden="true">→</span>
+        <span class="chain-node is-pending">Норма</span><span class="chain-arrow is-pending" aria-hidden="true">→</span>
+        <span class="chain-node is-pending">Практика</span><span class="chain-arrow is-pending" aria-hidden="true">→</span>
+        <span class="chain-node is-pending">Інституція</span><span class="chain-arrow is-pending" aria-hidden="true">→</span>
+        <span class="chain-node is-pending">Поведінка</span><span class="chain-arrow is-pending" aria-hidden="true">→</span>
+        <span class="chain-node chain-node--wide is-pending">Відтворення / зміна</span>
+      </div>
+      <div class="center-actions" id="lectureControls">
+        <button class="primary-button" id="lectureNext" type="button">Показати наступний елемент</button>
+      </div>
+      <div class="choice-block is-hidden" id="lectureQuestion">
+        <p class="question-large">Чи означає наявність цінності, що люди автоматично поводитимуться відповідно до неї?</p>
+        <div class="choice-row">
+          <button class="choice-button" type="button" data-lecture-choice>Так</button>
+          <button class="choice-button" type="button" data-lecture-choice>Ні</button>
+        </div>
+        <p class="verdict is-hidden" id="lectureVerdict">Сьогодні перевіримо.</p>
+      </div>
+    </section>
+
+    <section class="slide slide--navy" data-slide="3" aria-hidden="true">
+      <div class="slide-head slide-head--wide">
+        <p class="kicker">Розігрів</p>
+        <h2>Назвіть цінність, яку більшість людей підтримує на словах, але не завжди реалізує у поведінці.</h2>
+      </div>
+      <div class="value-grid" id="valueGrid" aria-label="Приклади цінностей">
+        <button class="flip-value" type="button" data-value="Здоров’я"><span>01</span><strong>Відкрити приклад</strong></button>
+        <button class="flip-value" type="button" data-value="Чесність"><span>02</span><strong>Відкрити приклад</strong></button>
+        <button class="flip-value" type="button" data-value="Екологічність"><span>03</span><strong>Відкрити приклад</strong></button>
+        <button class="flip-value" type="button" data-value="Повага"><span>04</span><strong>Відкрити приклад</strong></button>
+        <button class="flip-value" type="button" data-value="Рівність"><span>05</span><strong>Відкрити приклад</strong></button>
+        <button class="flip-value" type="button" data-value="Освіта"><span>06</span><strong>Відкрити приклад</strong></button>
+      </div>
+      <div class="warmup-footer is-hidden" id="warmupFooter">
+        <p><strong>Цінність</strong><span>≠</span><strong>Поведінка</strong></p>
+        <button class="secondary-button secondary-button--light" id="warmupQuestionButton" type="button">Що знаходиться між ними?</button>
+      </div>
+      <p class="question-banner is-hidden" id="warmupQuestion">Що знаходиться між ними?</p>
+    </section>
+
+    <section class="slide slide--light" data-slide="4" aria-hidden="true">
+      <div class="training-layout">
+        <div class="training-copy">
+          <p class="kicker">Спробуємо разом</p>
+          <h2>Академічна доброчесність</h2>
+          <p class="training-step-label" id="trainingStepLabel">Питання 1 із 6</p>
+          <h3 class="training-question" id="trainingQuestion">Який тут смисл?</h3>
+          <div class="answer-reveal is-hidden" id="trainingAnswer"></div>
+          <div class="training-actions">
+            <button class="primary-button" id="trainingReveal" type="button">Показати можливу відповідь</button>
+            <button class="secondary-button is-hidden" id="trainingContinue" type="button">Наступне питання →</button>
+          </div>
+        </div>
+        <div class="training-map" aria-label="Прогрес навчального ланцюга">
+          <div class="training-map__header"><span>Ланцюг формується поступово</span><strong id="trainingProgress">0 / 6</strong></div>
+          <div class="training-slots" id="trainingSlots"></div>
+          <div class="training-chain-final is-hidden" id="trainingFinal" aria-label="Повний ланцюг академічної доброчесності"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--navy slide--rupture" data-slide="5" aria-hidden="true">
+      <div class="slide-head slide-head--wide">
+        <p class="kicker">Стрес-тест</p>
+        <h2>Зламай механізм</h2>
+      </div>
+      <div class="mechanism-row mechanism-row--dark" id="integrityMechanism">
+        <button class="mechanism-node" type="button" data-node="meaning">Смисл</button><span class="mechanism-arrow">→</span>
+        <button class="mechanism-node" type="button" data-node="value">Цінність</button><span class="mechanism-arrow">→</span>
+        <button class="mechanism-node" type="button" data-node="norm">Норма</button><span class="mechanism-arrow">→</span>
+        <button class="mechanism-node" type="button" data-node="practice">Практика</button><span class="mechanism-arrow">→</span>
+        <button class="mechanism-node" type="button" data-node="institution">Інституція</button><span class="mechanism-arrow">→</span>
+        <button class="mechanism-node" type="button" data-node="behavior">Поведінка</button>
+      </div>
+      <div class="rupture-action">
+        <button class="shock-button" id="changeCondition" type="button"><span aria-hidden="true">⚡</span> Змінити умови</button>
+      </div>
+      <div class="rupture-reveal is-hidden" id="ruptureReveal">
+        <p class="condition-text">Студенти бачать, що порушення правил фактично ніхто не перевіряє.</p>
+        <div class="rupture-discussion">
+          <h3>Що зламалося?</h3>
+          <button class="secondary-button secondary-button--light" id="highlightWeak" type="button">Підсвітити ключову зону</button>
+        </div>
+        <p class="rupture-conclusion is-hidden" id="ruptureConclusion">Цінність може залишитися, але механізм її реалізації — послабитися.</p>
+      </div>
+    </section>
+
+    <section class="slide slide--orange" data-slide="6" aria-hidden="true">
+      <div class="assignment-grid">
+        <div>
+          <p class="kicker">Ваше завдання</p>
+          <h2>Тепер ви — аналітики культурного механізму.</h2>
+        </div>
+        <div class="assignment-card">
+          <p>Не оцінюйте кейс як «хороший» або «поганий».</p>
+          <p class="assignment-label">Відновіть</p>
+          <div class="compact-chain">Смисл → Цінність → Норма → Практика → Інституція → Поведінка → Зворотний зв’язок</div>
+          <p class="arrow-rule">Пояснюйте <strong>стрілки</strong>, а не лише вузли.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--light" data-slide="7" aria-hidden="true">
+      <div class="slide-head slide-head--inline">
+        <div><p class="kicker">Розподіл груп</p><h2>Оберіть свій кейс</h2></div>
+        <p class="slide-side-note">Натисніть картку, щоб відкрити її на весь екран.</p>
+      </div>
+      <div class="case-grid" id="caseGrid">
+        <button class="case-card" type="button" data-case="A"><span class="case-code">A</span><strong>Борщ як спадщина</strong><small>Родинна практика → публічний символ</small></button>
+        <button class="case-card" type="button" data-case="B"><span class="case-code">B</span><strong>Громадська цифрова бібліотека</strong><small>Архів → цифрова платформа</small></button>
+        <button class="case-card" type="button" data-case="C"><span class="case-code">C</span><strong>Меморіальний день громади</strong><small>Приватна скорбота → публічний ритуал</small></button>
+        <button class="case-card" type="button" data-case="D"><span class="case-code">D</span><strong>Мовна норма онлайн-спільноти</strong><small>Правило → політика й санкції</small></button>
+        <button class="case-card" type="button" data-case="E"><span class="case-code">E</span><strong>Ремісничий фестиваль</strong><small>Уміння → туристичний продукт</small></button>
+        <button class="case-card" type="button" data-case="F"><span class="case-code">F</span><strong>Шкільний кодекс взаємоповаги</strong><small>Безпека → правила й процедури</small></button>
+      </div>
+    </section>
+
+    <section class="slide slide--navy" data-slide="8" aria-hidden="true">
+      <div class="work-layout">
+        <div class="work-copy">
+          <p class="kicker">Крок 1</p>
+          <h2>Спочатку — власна позиція</h2>
+          <ol class="question-list">
+            <li>Яка одна цінність уже присутня у вашому кейсі?</li>
+            <li>Що ця практика означає для людей?</li>
+            <li>Хто може не поділяти цю цінність або розуміти її інакше?</li>
+          </ol>
+          <p class="do-not-edit">Запишіть відповідь <strong>до</strong> групового обговорення. Потім її не переписуємо.</p>
+        </div>
+        <div class="timer" data-timer="300">
+          <div class="timer__label">Особистий запис</div>
+          <div class="timer__display" aria-live="polite">05:00</div>
+          <div class="timer__track"><i></i></div>
+          <div class="timer__controls">
+            <button type="button" data-timer-action="start">Старт</button>
+            <button type="button" data-timer-action="pause">Пауза</button>
+            <button type="button" data-timer-action="reset">Скинути</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--light" data-slide="9" aria-hidden="true">
+      <div class="slide-head slide-head--inline">
+        <div><p class="kicker">Групова робота</p><h2>Побудуйте механізм</h2></div>
+        <div class="timer timer--compact" data-timer="900">
+          <div class="timer__display" aria-live="polite">15:00</div>
+          <div class="timer__controls">
+            <button type="button" data-timer-action="start">Старт</button>
+            <button type="button" data-timer-action="pause">Пауза</button>
+            <button type="button" data-timer-action="reset">Скинути</button>
+          </div>
+        </div>
+      </div>
+      <div class="blank-chain" aria-label="Порожня схема культурного механізму">
+        <div><span>Смисл</span><i></i></div><b>→<small>Чому?</small></b>
+        <div><span>Цінність</span><i></i></div><b>→<small>Чому?</small></b>
+        <div><span>Норма</span><i></i></div><b>→<small>Чому?</small></b>
+        <div><span>Практика</span><i></i></div><b>→<small>Чому?</small></b>
+        <div><span>Інституція</span><i></i></div><b>→<small>Чому?</small></b>
+        <div><span>Поведінка</span><i></i></div><b>→<small>Чому?</small></b>
+        <div><span>Відтворення / зміна</span><i></i></div>
+      </div>
+      <p class="arrow-prompt">Для кожної стрілки: <strong>чому</strong> одне призводить до іншого?</p>
+      <div class="probe-list">
+        <span>Де тут гроші?</span><span>Хто приймає рішення?</span><span>Яке правило діє?</span>
+        <span>Як воно передається?</span><span>Хто забезпечує виконання?</span><span>Хто може бути виключений?</span>
+      </div>
+    </section>
+
+    <section class="slide slide--paper" data-slide="10" aria-hidden="true">
+      <div class="slide-head slide-head--wide">
+        <p class="kicker">Невидимі умови</p>
+        <h2>Що підтримує механізм, навіть якщо цього не видно?</h2>
+      </div>
+      <div class="condition-grid" id="conditionGrid">
+        <button type="button"><span aria-hidden="true">₴</span><strong>Ресурс</strong></button>
+        <button type="button"><span aria-hidden="true">§</span><strong>Право</strong></button>
+        <button type="button"><span aria-hidden="true">↗</span><strong>Комунікація / освіта</strong></button>
+        <button type="button"><span aria-hidden="true">▦</span><strong>Матеріальний носій</strong></button>
+        <button type="button"><span aria-hidden="true">◌</span><strong>Виключена або слабше представлена група</strong></button>
+      </div>
+      <p class="central-question">Без якого з цих елементів ваш механізм перестане працювати?</p>
+    </section>
+
+    <section class="slide slide--shock" data-slide="11" aria-hidden="true">
+      <div class="shock-intro" id="shockIntro">
+        <div class="shock-symbol" aria-hidden="true">⚡</div>
+        <p class="kicker">Нові умови</p>
+        <h2>Ваша початкова модель більше не працює в тих самих умовах.</h2>
+        <button class="shock-button shock-button--light" id="openChanges" type="button">Відкрити зміну</button>
+      </div>
+      <div class="change-stage is-hidden" id="changeStage">
+        <div class="slide-head slide-head--inline">
+          <div><p class="kicker">Картка-зміна</p><h2>Оберіть одну картку</h2></div>
+          <p class="slide-side-note">Текст відкриється лише після вибору.</p>
+        </div>
+        <div class="change-grid">
+          <button class="change-card" type="button" data-change="З1" data-text="Фінансування скорочено на 40%."><span>З1</span><small>Відкрити картку</small></button>
+          <button class="change-card" type="button" data-change="З2" data-text="Практика отримала правове визнання."><span>З2</span><small>Відкрити картку</small></button>
+          <button class="change-card" type="button" data-change="З3" data-text="Цифрова платформа змінила правила видимості."><span>З3</span><small>Відкрити картку</small></button>
+          <button class="change-card" type="button" data-change="З4" data-text="Носії практики розділилися щодо «автентичності»."><span>З4</span><small>Відкрити картку</small></button>
+          <button class="change-card" type="button" data-change="З5" data-text="Великий спонсор вимагає змінити зміст."><span>З5</span><small>Відкрити картку</small></button>
+          <button class="change-card" type="button" data-change="З6" data-text="Поширено неправдиве пояснення походження практики."><span>З6</span><small>Відкрити картку</small></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--light" data-slide="12" aria-hidden="true">
+      <div class="slide-head slide-head--wide">
+        <p class="kicker">Що зламалося?</p>
+        <h2>Покажіть місце розриву</h2>
+      </div>
+      <div class="break-chain" id="breakChain" aria-label="Позначення розриву в механізмі">
+        <span>Смисл</span><button type="button" aria-label="Зв’язок смисл — цінність">→</button>
+        <span>Цінність</span><button type="button" aria-label="Зв’язок цінність — норма">→</button>
+        <span>Норма</span><button type="button" aria-label="Зв’язок норма — практика">→</button>
+        <span>Практика</span><button type="button" aria-label="Зв’язок практика — інституція">→</button>
+        <span>Інституція</span><button type="button" aria-label="Зв’язок інституція — поведінка">→</button>
+        <span>Поведінка</span><button type="button" aria-label="Зв’язок поведінка — зворотний зв’язок">→</button>
+        <span>Зворотний зв’язок</span>
+      </div>
+      <div class="diagnostic-grid">
+        <p>Чи змінився <strong>смисл</strong>?</p><p>Чи змінилася <strong>цінність</strong>?</p>
+        <p>Чи змінилася <strong>норма</strong>?</p><p>Чи стало неможливо підтримувати <strong>практику</strong>?</p>
+        <p>Чи змінилися стимули <strong>інституції</strong>?</p><p>Чи змінилася <strong>поведінка</strong>?</p>
+      </div>
+    </section>
+
+    <section class="slide slide--navy" data-slide="13" aria-hidden="true">
+      <div class="repair-layout">
+        <div class="repair-copy">
+          <p class="kicker">Ремонт механізму</p>
+          <h2>Ви можете змінити максимум 3 зв’язки.</h2>
+          <div class="repair-formula"><span>Було</span><b>→</b><span>Стало</span><b>→</b><span>Чому</span></div>
+          <p>Не перебудовуйте всю систему. Визначте мінімальну зміну, необхідну для адаптації.</p>
+          <div class="repair-slots"><span>Зв’язок 1</span><span>Зв’язок 2</span><span>Зв’язок 3</span></div>
+        </div>
+        <div class="timer" data-timer="720">
+          <div class="timer__label">Аргументована ревізія</div>
+          <div class="timer__display" aria-live="polite">12:00</div>
+          <div class="timer__track"><i></i></div>
+          <div class="timer__controls">
+            <button type="button" data-timer-action="start">Старт</button>
+            <button type="button" data-timer-action="pause">Пауза</button>
+            <button type="button" data-timer-action="reset">Скинути</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--orange" data-slide="14" aria-hidden="true">
+      <div class="defense-layout">
+        <div>
+          <p class="kicker">Захист</p>
+          <h2>2 хвилини на групу</h2>
+          <div class="timer timer--ink" data-timer="120">
+            <div class="timer__display" aria-live="polite">02:00</div>
+            <div class="timer__controls">
+              <button type="button" data-timer-action="start">Старт</button>
+              <button type="button" data-timer-action="pause">Пауза</button>
+              <button type="button" data-timer-action="reset">Нова група</button>
+            </div>
+          </div>
+        </div>
+        <div class="answer-template">
+          <p>Наша головна цінність — <i>…</i></p>
+          <p>Ключовий механізм — <i>…</i></p>
+          <p>Після нової події змінився зв’язок <i>… → …</i></p>
+          <p>Ми перебудували його так: <i>…</i></p>
+          <p>Головний ризик нашого рішення — <i>…</i></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--paper" data-slide="15" aria-hidden="true">
+      <div class="cross-layout">
+        <div>
+          <p class="kicker">Перехресне питання</p>
+          <h2>Не запитайте «чому?». Спробуйте зламати модель.</h2>
+          <p class="lead">Поставте іншій групі одне питання, відповідь на яке може спростувати її причинний механізм.</p>
+          <button class="primary-button" id="crossReveal" type="button">Показати приклад</button>
+        </div>
+        <blockquote class="cross-example is-hidden" id="crossExample">«Ви стверджуєте, що люди підтримують практику через культурну цінність. Що станеться з вашим поясненням, якщо дані покажуть, що більшість учасників керується економічною вигодою?»</blockquote>
+      </div>
+    </section>
+
+    <section class="slide slide--navy" data-slide="16" aria-hidden="true">
+      <div class="exit-layout">
+        <div>
+          <p class="kicker">Exit ticket</p>
+          <h2>Що змінилося у вашому поясненні?</h2>
+          <p class="exit-task">Назвіть один зв’язок, який ви спочатку вважали автоматичним. Який доказ або запитання змусили вас його уточнити?</p>
+          <p class="word-count">90–120 слів</p>
+        </div>
+        <div class="timer" data-timer="420">
+          <div class="timer__label">Особиста відповідь</div>
+          <div class="timer__display" aria-live="polite">07:00</div>
+          <div class="timer__track"><i></i></div>
+          <div class="timer__controls">
+            <button type="button" data-timer-action="start">Старт</button>
+            <button type="button" data-timer-action="pause">Пауза</button>
+            <button type="button" data-timer-action="reset">Скинути</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--final" data-slide="17" aria-hidden="true">
+      <div class="final-content">
+        <p class="kicker">Фінал</p>
+        <div class="final-equation" id="finalEquation" aria-live="polite">
+          <span class="is-shown">Цінність</span><b class="is-hidden">≠</b><span class="is-hidden">Поведінка</span>
+        </div>
+        <div class="final-chain is-hidden" id="finalChain">
+          <span>Цінність</span><b>→</b><span>Норма</span><b>→</b><span>Практика</span><b>→</b><span>Інституція</span><b>→</b><span>Поведінка</span>
+        </div>
+        <p class="final-statement is-hidden" id="finalStatement">Культурний механізм потрібно не назвати — його потрібно пояснити.</p>
+        <p class="final-question is-hidden" id="finalQuestion">Де саме може зламатися цей механізм?</p>
+        <button class="primary-button" id="finalReveal" type="button">Продовжити</button>
+      </div>
+    </section>
+  </main>
+
+  <nav class="deck-nav" aria-label="Навігація між екранами">
+    <button type="button" id="prevButton"><span aria-hidden="true">←</span> Назад</button>
+    <div class="deck-status">
+      <span id="slideCounter">1 / 17</span>
+      <div class="deck-progress" aria-hidden="true"><i id="deckProgress"></i></div>
+      <span id="slideTitle">Обкладинка</span>
+    </div>
+    <button type="button" id="nextButton">Далі <span aria-hidden="true">→</span></button>
+  </nav>
+
+  <aside class="teacher-panel" id="teacherPanel" aria-hidden="true" aria-label="Панель викладача">
+    <div class="teacher-panel__head">
+      <div><span>Режим викладача</span><strong id="teacherStage">Екран 1</strong></div>
+      <button type="button" id="teacherClose" aria-label="Закрити панель">×</button>
+    </div>
+    <div class="teacher-time"><span>Орієнтовний час</span><strong id="teacherTime">0–1 хв</strong></div>
+    <section><h3>Запитайте</h3><p id="teacherQuestions"></p></section>
+    <section><h3>Напрями відповіді</h3><p id="teacherDirections"></p></section>
+    <section><h3>Якщо аудиторія мовчить</h3><p id="teacherSilence"></p></section>
+    <section><h3>Головний висновок</h3><p id="teacherTakeaway"></p></section>
+    <section class="teacher-example is-hidden" id="teacherExample"><h3>Орієнтир для кейсу A</h3><div id="teacherExampleBody"></div></section>
+    <p class="teacher-shortcuts"><kbd>T</kbd> панель · <kbd>F</kbd> fullscreen · <kbd>←</kbd><kbd>→</kbd> навігація · <kbd>Space</kbd> дія</p>
+  </aside>
+  <button class="panel-scrim" id="teacherScrim" type="button" aria-label="Закрити панель викладача" tabindex="-1"></button>
+
+  <div class="modal" id="caseModal" role="dialog" aria-modal="true" aria-labelledby="caseModalTitle" aria-hidden="true">
+    <button class="modal__scrim" type="button" data-close-case aria-label="Закрити картку"></button>
+    <article class="modal__card">
+      <button class="modal__close" type="button" data-close-case aria-label="Закрити картку">×</button>
+      <div class="modal__code" id="caseModalCode">A</div>
+      <p class="kicker">Кейс для групи</p>
+      <h2 id="caseModalTitle"></h2>
+      <p class="modal__situation" id="caseModalSituation"></p>
+      <div class="modal__conflict"><span>Конфлікт</span><p id="caseModalConflict"></p></div>
+    </article>
+  </div>
+
+  <div class="overview" id="overview" role="dialog" aria-modal="true" aria-labelledby="overviewTitle" aria-hidden="true">
+    <div class="overview__panel">
+      <div class="overview__head"><div><p class="kicker">Навігація</p><h2 id="overviewTitle">17 екранів заняття</h2></div><button type="button" id="overviewClose" aria-label="Закрити огляд">×</button></div>
+      <div class="overview__grid" id="overviewGrid"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>

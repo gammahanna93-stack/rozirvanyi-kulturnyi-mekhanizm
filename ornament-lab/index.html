@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Інтерактивна STEM-гра про орнамент, культурну пам’ять та ранні інституції">
+  <title>Код орнаменту — STEM-лабораторія</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2308172a'/%3E%3Cpath d='M16 32c0-12 8-18 16-18s16 6 16 18-8 18-16 18-16-6-16-18Z' fill='none' stroke='%23ff8a3d' stroke-width='5'/%3E%3Cpath d='M22 32c0-6 4-9 10-9s10 3 10 9-4 9-10 9-10-3-10-9Z' fill='none' stroke='%2358d6d0' stroke-width='4'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient--one" aria-hidden="true"></div>
+  <div class="ambient ambient--two" aria-hidden="true"></div>
+
+  <header class="lab-header">
+    <a class="brand" href="#intro" aria-label="На початок гри">
+      <span class="brand__mark" aria-hidden="true"><i></i></span>
+      <span><b>Код орнаменту</b><small>STEM-лабораторія культурної пам’яті</small></span>
+    </a>
+    <div class="lab-status">
+      <span class="connection" id="connectionBadge"><i></i> Демо-режим</span>
+      <div class="score-chip" aria-live="polite"><small>Бал</small><b id="liveScore">0</b><span>/10</span></div>
+    </div>
+  </header>
+
+  <aside class="mission-rail" aria-label="Прогрес гри">
+    <button class="rail-step is-active" data-go="intro" aria-label="Вступ"><span>00</span><i></i></button>
+    <button class="rail-step" data-go="mission-1" disabled aria-label="Місія 1"><span>01</span><i></i></button>
+    <button class="rail-step" data-go="mission-2" disabled aria-label="Місія 2"><span>02</span><i></i></button>
+    <button class="rail-step" data-go="mission-3" disabled aria-label="Місія 3"><span>03</span><i></i></button>
+    <button class="rail-step" data-go="mission-4" disabled aria-label="Місія 4"><span>04</span><i></i></button>
+    <button class="rail-step" data-go="mission-5" disabled aria-label="Місія 5"><span>05</span><i></i></button>
+    <button class="rail-step" data-go="results" disabled aria-label="Результат"><span>10</span><i></i></button>
+  </aside>
+
+  <main id="game" class="game-shell">
+    <section class="view intro-view is-active" id="intro" data-step="0">
+      <div class="intro-copy">
+        <p class="eyebrow"><span>Лекція 2</span> · інтерактивне оцінювання</p>
+        <h1>Читайте орнамент<br><em>як дослідник</em></h1>
+        <p class="intro-lead">П’ять лабораторних місій поєднають археологію, цифрові технології, реконструкцію та математику симетрії. Ваше завдання — бачити форму точно й не приписувати їй того, чого джерело не доводить.</p>
+
+        <div class="intro-actions">
+          <button class="primary-button" id="startButton" type="button">Почати дослідження</button>
+          <button class="text-button" id="continueButton" type="button" hidden>Продовжити спробу</button>
+        </div>
+        <div class="mission-specs" aria-label="Параметри гри">
+          <div><b>5</b><span>STEM-місій</span></div>
+          <div><b>10</b><span>оцінюваних рішень</span></div>
+          <div><b>15</b><span>хвилин</span></div>
+        </div>
+        <p class="microcopy">Максимум — 10 балів. Після кожної місії ви отримаєте пояснення, а наприкінці — повний аналітичний звіт.</p>
+      </div>
+
+      <div class="artifact-stack" aria-label="Артефакти, що досліджуються у грі">
+        <figure class="artifact-card artifact-card--main">
+          <img src="assets/trypillia.jpg" alt="Орнаментована кераміка Кукутень-Трипільської культурної спільності">
+          <figcaption><span>Україна</span><strong>Кукутень–Трипілля</strong><small>пофарбовані криволінійні композиції</small></figcaption>
+        </figure>
+        <figure class="artifact-card artifact-card--small artifact-card--jomon">
+          <img src="assets/jomon.jpg" alt="Керамічні посудини фінального періоду Дзьомон">
+          <figcaption><span>Японія</span><strong>Дзьомон</strong></figcaption>
+        </figure>
+        <figure class="artifact-card artifact-card--small artifact-card--seal">
+          <img src="assets/mesopotamia.jpg" alt="Відбиток месопотамської циліндричної печатки">
+          <figcaption><span>Месопотамія</span><strong>Циліндрична печатка</strong></figcaption>
+        </figure>
+        <div class="scan-line" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="view mission-view" id="mission-1" data-step="1">
+      <header class="mission-head">
+        <div><p class="mission-code">Місія 01 · SCIENCE</p><h2>Спостереження чи припущення?</h2></div>
+        <div class="mission-points"><b>2</b><span>бали</span></div>
+      </header>
+
+      <div class="mission-grid mission-grid--image">
+        <figure class="evidence-frame zoom-frame">
+          <img src="assets/trypillia.jpg" alt="Трипільські орнаментовані посудини" id="trypilliaImage">
+          <button class="zoom-control" type="button" id="zoomTrypillia" aria-pressed="false">Збільшити деталі</button>
+          <figcaption><span>Досьє UA–01</span> Орнаментовані посудини Кукутень–Трипілля. Фото сучасної музейної експозиції.</figcaption>
+        </figure>
+
+        <div class="question-stack">
+          <article class="question-card" data-question="q1">
+            <p class="question-number">Рішення 1/10</p>
+            <h3>Яке твердження безпосередньо спирається на те, що видно на фотографії?</h3>
+            <div class="options" role="radiogroup" aria-label="Варіанти до першого питання">
+              <button type="button" class="option" data-value="visible"><span>A</span>На поверхні повторюються темні криволінійні смуги.</button>
+              <button type="button" class="option" data-value="sun"><span>B</span>Спіралі обов’язково позначають культ Сонця.</button>
+              <button type="button" class="option" data-value="priest"><span>C</span>Посуд виготовляли лише жриці.</button>
+            </div>
+            <div class="feedback" aria-live="polite"></div>
+          </article>
+
+          <article class="question-card" data-question="q2">
+            <p class="question-number">Рішення 2/10</p>
+            <h3>Твердження «спіраль мала релігійне значення» — це…</h3>
+            <div class="options options--compact" role="radiogroup" aria-label="Рівень доказовості">
+              <button type="button" class="option" data-value="fact">факт спостереження</button>
+              <button type="button" class="option" data-value="interpretation">інтерпретація / гіпотеза</button>
+              <button type="button" class="option" data-value="measurement">вимірювання</button>
+            </div>
+            <div class="feedback" aria-live="polite"></div>
+          </article>
+        </div>
+      </div>
+      <footer class="mission-footer"><p class="mission-hint">Наука починається з дисципліни опису: спершу фіксуємо ознаку, потім пояснюємо.</p><button class="check-button" data-check="1" type="button">Перевірити місію</button><button class="next-button" data-next="mission-2" type="button" hidden>До місії 2</button></footer>
+    </section>
+
+    <section class="view mission-view" id="mission-2" data-step="2">
+      <header class="mission-head">
+        <div><p class="mission-code">Місія 02 · MATHEMATICS</p><h2>Геометрія повторення</h2></div>
+        <div class="mission-points"><b>2</b><span>бали</span></div>
+      </header>
+
+      <div class="mission-grid">
+        <div class="pattern-lab">
+          <div class="pattern-stage" id="patternStage" aria-label="Схематичний модуль із чотирма обертальними елементами">
+            <svg viewBox="0 0 520 420" role="img" aria-label="Чотирипроменевий криволінійний модуль">
+              <defs>
+                <filter id="glow"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              </defs>
+              <g class="grid-lines" opacity=".25">
+                <path d="M60 210h400M260 20v380"/><circle cx="260" cy="210" r="150"/><circle cx="260" cy="210" r="90"/>
+              </g>
+              <g class="pattern-object" id="patternObject" filter="url(#glow)">
+                <path d="M260 210c0-72 52-120 118-120-6 44-35 77-78 82 44 6 73 39 78 82-66 0-118-48-118-120Z"/>
+                <path d="M260 210c72 0 120 52 120 118-44-6-77-35-82-78-6 44-39 73-82 78 0-66 48-118 120-118Z" transform="rotate(90 260 210)"/>
+                <path d="M260 210c0 72-52 120-118 120 6-44 35-77 78-82-44-6-73-39-78-82 66 0 118 48 118 120Z"/>
+                <path d="M260 210c-72 0-120-52-120-118 44 6 77 35 82 78 6-44 39-73 82-78 0 66-48 118-120 118Z" transform="rotate(90 260 210)"/>
+                <circle cx="260" cy="210" r="29"/>
+              </g>
+              <path class="angle-mark" d="M260 72a138 138 0 0 1 138 138"/><text x="342" y="104">90°</text>
+            </svg>
+          </div>
+          <div class="lab-controls">
+            <button type="button" id="rotatePattern">Обернути на 90°</button>
+            <button type="button" id="mirrorPattern">Віддзеркалити</button>
+            <button type="button" id="resetPattern">Скинути</button>
+          </div>
+          <p class="lab-note"><b>Експеримент:</b> якщо після перетворення контур збігається із початковим, це перетворення є симетрією композиції.</p>
+        </div>
+
+        <div class="question-stack">
+          <article class="question-card" data-question="q3">
+            <p class="question-number">Рішення 3/10</p>
+            <h3>Яке перетворення зберігає композицію без зміни?</h3>
+            <div class="options options--compact" role="radiogroup">
+              <button type="button" class="option" data-value="rotate90">обертання на 90°</button>
+              <button type="button" class="option" data-value="shift">довільне зміщення</button>
+              <button type="button" class="option" data-value="scale">збільшення удвічі</button>
+            </div>
+            <div class="feedback" aria-live="polite"></div>
+          </article>
+          <article class="question-card" data-question="q4">
+            <p class="question-number">Рішення 4/10</p>
+            <h3>Скільки разів базовий криволінійний елемент повторено навколо центра?</h3>
+            <div class="number-options" role="radiogroup">
+              <button type="button" class="option" data-value="2">2</button><button type="button" class="option" data-value="3">3</button><button type="button" class="option" data-value="4">4</button><button type="button" class="option" data-value="8">8</button>
+            </div>
+            <div class="feedback" aria-live="polite"></div>
+          </article>
+        </div>
+      </div>
+      <footer class="mission-footer"><p class="mission-hint">Математична симетрія описує структуру форми, але сама не перекладає її культурне значення.</p><button class="check-button" data-check="2" type="button">Перевірити місію</button><button class="next-button" data-next="mission-3" type="button" hidden>До місії 3</button></footer>
+    </section>
+
+    <section class="view mission-view" id="mission-3" data-step="3">
+      <header class="mission-head">
+        <div><p class="mission-code">Місія 03 · ENGINEERING</p><h2>Цифрова реставрація</h2></div>
+        <div class="mission-points"><b>2</b><span>бали</span></div>
+      </header>
+
+      <div class="restoration-layout">
+        <div class="restoration-bench">
+          <div class="strip-preview" aria-label="Орнаментальна смуга з пропущеним фрагментом">
+            <div class="strip-tile tile-a"></div><div class="strip-tile tile-b"></div><div class="strip-tile tile-a"></div>
+            <div class="drop-zone" id="fragmentDrop" tabindex="0"><span>?</span><small>перетягніть фрагмент</small></div>
+            <div class="strip-tile tile-a"></div><div class="strip-tile tile-b"></div>
+          </div>
+          <div class="fragment-tray" aria-label="Фрагменти для відновлення">
+            <button class="fragment fragment-a" draggable="true" data-fragment="a" type="button"><span></span><b>A</b></button>
+            <button class="fragment fragment-b" draggable="true" data-fragment="b" type="button"><span></span><b>B</b></button>
+            <button class="fragment fragment-c" draggable="true" data-fragment="c" type="button"><span></span><b>C</b></button>
+          </div>
+          <p class="lab-note">Перетягніть фрагмент у порожнє місце або натисніть на нього. Використовуйте правило чергування модулів.</p>
+        </div>
+
+        <div class="question-stack">
+          <article class="question-card" data-question="q5">
+            <p class="question-number">Рішення 5/10</p>
+            <h3>Який фрагмент найкраще продовжує зафіксоване чергування?</h3>
+            <p class="answer-status" id="fragmentStatus">Фрагмент ще не встановлено.</p>
+            <div class="feedback" aria-live="polite"></div>
+          </article>
+          <article class="question-card" data-question="q6">
+            <p class="question-number">Рішення 6/10</p>
+            <h3>Який статус має така цифрова реконструкція?</h3>
+            <div class="options" role="radiogroup">
+              <button type="button" class="option" data-value="certain">Це безумовно первісний вигляд.</button>
+              <button type="button" class="option" data-value="plausible">Це обґрунтований, але перевірний варіант.</button>
+              <button type="button" class="option" data-value="fiction">Це довільна фантазія без опори на форму.</button>
+            </div>
+            <div class="feedback" aria-live="polite"></div>
+          </article>
+        </div>
+      </div>
+      <footer class="mission-footer"><p class="mission-hint">Інженерна реконструкція працює з обмеженнями: вона має бути відтворюваною, поясненою і відкритою до перегляду.</p><button class="check-button" data-check="3" type="button">Перевірити місію</button><button class="next-button" data-next="mission-4" type="button" hidden>До місії 4</button></footer>
+    </section>
+
+    <section class="view mission-view" id="mission-4" data-step="4">
+      <header class="mission-head">
+        <div><p class="mission-code">Місія 04 · TECHNOLOGY</p><h2>Три технології сліду</h2></div>
+        <div class="mission-points"><b>2</b><span>бали</span></div>
+      </header>
+
+      <div class="culture-lab">
+        <p class="culture-instruction">Для кожного артефакту виберіть технологію, яка найкраще пояснює видимий слід.</p>
+        <div class="culture-grid">
+          <article class="culture-card">
+            <div class="culture-image"><img src="assets/trypillia.jpg" alt="Орнаментована трипільська кераміка"><span>UA–01</span></div>
+            <h3>Кукутень–Трипілля</h3><p>Криволінійні композиції на поверхні посудини.</p>
+            <label>Технологія<select data-match="trypillia"><option value="">Оберіть…</option><option value="paint">Нанесення фарбованих ліній</option><option value="cord">Відтискування шнура</option><option value="roll">Прокатування різьбленого циліндра</option></select></label>
+          </article>
+          <article class="culture-card">
+            <div class="culture-image"><img src="assets/jomon.jpg" alt="Кераміка культури Дзьомон"><span>JP–02</span></div>
+            <h3>Дзьомон</h3><p>Фактурні заглиблення й повтори на поверхні глини.</p>
+            <label>Технологія<select data-match="jomon"><option value="">Оберіть…</option><option value="paint">Нанесення фарбованих ліній</option><option value="cord">Відтискування шнура</option><option value="roll">Прокатування різьбленого циліндра</option></select></label>
+          </article>
+          <article class="culture-card">
+            <div class="culture-image"><img src="assets/mesopotamia.jpg" alt="Відбиток месопотамської циліндричної печатки"><span>ME–03</span></div>
+            <h3>Месопотамія</h3><p>Безперервна сцена, перенесена на м’яку поверхню.</p>
+            <label>Технологія<select data-match="mesopotamia"><option value="">Оберіть…</option><option value="paint">Нанесення фарбованих ліній</option><option value="cord">Відтискування шнура</option><option value="roll">Прокатування різьбленого циліндра</option></select></label>
+          </article>
+        </div>
+
+        <div class="question-card culture-question" data-question="q7"><p class="question-number">Рішення 7/10</p><h3>Технологічне зіставлення</h3><p id="matchStatus">Заповніть усі три поля. Один бал нараховується лише за повне правильне зіставлення.</p><div class="feedback" aria-live="polite"></div></div>
+        <article class="question-card culture-question" data-question="q8">
+          <p class="question-number">Рішення 8/10</p>
+          <h3>Який висновок найкраще поєднує технологію та інституції?</h3>
+          <div class="options" role="radiogroup">
+            <button type="button" class="option" data-value="magic">Складний орнамент автоматично доводить існування держави.</button>
+            <button type="button" class="option" data-value="coordination">Повторювані техніки могли підтримувати навчання, впізнавання та узгоджені правила виробництва.</button>
+            <button type="button" class="option" data-value="same">Однаковий геометричний мотив завжди означає контакт між народами.</button>
+          </div>
+          <div class="feedback" aria-live="polite"></div>
+        </article>
+      </div>
+      <footer class="mission-footer"><p class="mission-hint">Технологія залишає слід не лише на речі: вона організує навички, послідовність дій і передачу знань.</p><button class="check-button" data-check="4" type="button">Перевірити місію</button><button class="next-button" data-next="mission-5" type="button" hidden>До місії 5</button></footer>
+    </section>
+
+    <section class="view mission-view" id="mission-5" data-step="5">
+      <header class="mission-head">
+        <div><p class="mission-code">Місія 05 · STEM SYNTHESIS</p><h2>Суд інтерпретацій</h2></div>
+        <div class="mission-points"><b>2</b><span>бали</span></div>
+      </header>
+
+      <div class="verdict-layout">
+        <div class="verdict-intro">
+          <div class="lens-icon" aria-hidden="true"></div>
+          <p class="eyebrow">Фінальне досьє</p>
+          <h3>Подібність — це початок запитання, а не кінець доказу.</h3>
+          <p>Визначте, які формулювання академічно коректні. Пам’ятайте про часові розриви, контекст знахідки та альтернативні пояснення.</p>
+          <div class="evidence-scale"><span>спостереження</span><span>порівняння</span><span>інтерпретація</span><span>гіпотеза</span></div>
+        </div>
+        <div class="question-stack">
+          <article class="question-card" data-question="q9">
+            <p class="question-number">Рішення 9/10</p>
+            <h3>Чи доводить подібна спіраль пряму спадкоємність між трипільською керамікою та сучасною українською вишивкою?</h3>
+            <div class="options options--split" role="radiogroup"><button type="button" class="option" data-value="yes">Так, форма є достатнім доказом.</button><button type="button" class="option" data-value="no">Ні, потрібен ланцюг історичних і контекстуальних доказів.</button></div>
+            <div class="feedback" aria-live="polite"></div>
+          </article>
+          <article class="question-card" data-question="q10">
+            <p class="question-number">Рішення 10/10</p>
+            <h3>Яке твердження про орнамент як культурну пам’ять є найточнішим?</h3>
+            <div class="options" role="radiogroup">
+              <button type="button" class="option" data-value="dictionary">Кожен знак має незмінний універсальний переклад.</button>
+              <button type="button" class="option" data-value="memory">Повторювана форма може підтримувати впізнавання й передачу практики, але її значення встановлюють у контексті.</button>
+              <button type="button" class="option" data-value="decoration">Орнамент завжди є лише прикрасою і не бере участі в комунікації.</button>
+            </div>
+            <div class="feedback" aria-live="polite"></div>
+          </article>
+        </div>
+      </div>
+      <footer class="mission-footer"><p class="mission-hint">Фінальний бал буде передано в Moodle після перевірки цієї місії.</p><button class="check-button" data-check="5" type="button">Завершити й визначити бал</button><button class="next-button" data-next="results" type="button" hidden>Переглянути звіт</button></footer>
+    </section>
+
+    <section class="view results-view" id="results" data-step="6">
+      <div class="results-hero">
+        <div class="score-orbit" aria-label="Фінальний результат"><svg viewBox="0 0 180 180"><circle class="score-track" cx="90" cy="90" r="72"/><circle class="score-progress" id="scoreProgress" cx="90" cy="90" r="72"/></svg><div><b id="finalScore">0</b><span>/10</span></div></div>
+        <div><p class="eyebrow">Лабораторію завершено</p><h2 id="resultTitle">Результат</h2><p id="resultSummary"></p><div class="result-tags" id="resultTags"></div></div>
+      </div>
+      <div class="results-grid">
+        <section class="report-panel"><div class="panel-head"><h3>Пояснення кожного бала</h3><span id="correctCount">0 із 10</span></div><div class="answer-report" id="answerReport"></div></section>
+        <aside class="next-study"><h3>Що повторити</h3><div id="studyAdvice"></div><button class="secondary-button" id="reviewButton" type="button">Переглянути відповіді</button><button class="text-button text-button--light" id="restartButton" type="button">Почати нову спробу</button></aside>
+      </div>
+      <details class="credits"><summary>Джерела зображень і ліцензії</summary><ul><li>Кераміка Кукутень–Трипілля — Wikimedia Commons, фото Bazhana.ph; сторінка файлу та умови ліцензії доступні в Commons.</li><li>Final Jōmon Pottery of Tohoku District — Ismoon, Tokyo National Museum, CC BY-SA 4.0 / GFDL.</li><li>Mesopotamian Cylinder Seal, Walters 42.564, Impression — Walters Art Museum / Wikimedia Commons, CC BY-SA 3.0.</li></ul><p>Схеми симетрії та реставрації є навчальними моделями, а не копіями конкретних артефактів.</p></details>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="scorm.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
